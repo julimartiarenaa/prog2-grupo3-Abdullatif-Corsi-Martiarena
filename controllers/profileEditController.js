@@ -1,4 +1,4 @@
-const datos = require("../db/index")
+/*const datos = require("../db/index")
 
 // no se que hacer con el controlador
 const profileEditController = {
@@ -7,4 +7,4 @@ const profileEditController = {
     }
 };
 
-module.exports = profileEditController;
+module.exports = profileEditController;*/

@@ -1,4 +1,4 @@
-const datos = require("../db/index")
+/*const datos = require("../db/index")
 
 //no se que hacer con el controlador.
 
@@ -8,4 +8,4 @@ const registerController = {
     }
 };
 
-module.exports = registerController;
+module.exports = registerController;*/
