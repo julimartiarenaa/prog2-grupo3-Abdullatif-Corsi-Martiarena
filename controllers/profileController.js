@@ -1,10 +1,13 @@
-/*const datos = require("../db/index")
+const datos = require("../db/index")
+const datosU = datos.usuario
 
-// no se que hacer con el controlador
 const profileController = {
-    register: function (req, res) {
-        
+    profile: function (req, res) {
+        return res.render ('profile', {datosU: datosU})
+    }, 
+    editProfile: function (req,res) {
+        return res.render ('profile-edit', {datos: datosU})
     }
 };
 
-module.exports = profileController;*/
+module.exports = profileController;
