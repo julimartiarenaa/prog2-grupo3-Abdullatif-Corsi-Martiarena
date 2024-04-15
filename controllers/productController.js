@@ -1,12 +1,11 @@
 const datos = require("../db/index")
+let productos = datos.productos
 
 const productController = {
     product: function (req, res) {
-        let productos = datos.productos
         res.render("product", {productos: productos})
     },
     addProduct: function (req, res) {
-        let productos = datos.productos
         res.render("product-add", {productos: productos})
     }
 }

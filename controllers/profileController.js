@@ -1,10 +1,10 @@
 /*const datos = require("../db/index")
 
 // no se que hacer con el controlador
-const profileEditController = {
+const profileController = {
     register: function (req, res) {
         
     }
 };
 
-module.exports = profileEditController;*/
+module.exports = profileController;*/
