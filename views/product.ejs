@@ -24,7 +24,7 @@
 		<div class="d-flex align-items-center">
 			<h2 class="products-title">Nombre del producto</h2> 
 			<p class="product-detail-description">
-				<a href="product-add.html">Editar</a>
+				<a href="product-add.html">Editar</a> <!-- cambio la ruta a .ejs ? -->
 			</p>
 		</div>
 		<div class="product-detail">
@@ -34,10 +34,37 @@
 					<p class="product-detail-description">
 						Descripción corta del producto. En la página principal solo se ven 2 líneas de estar descripción.Lorem ipsum dolor,
 						sit amet consectetur adipisicing elit. Tae ipsam amet eum, totam dolore libero illo unde? Consectetur dolorem neque
-						veritatis.</p>
+						veritatis. </p>
 				</article>
+				
+				<!--
+				EJ de descripcion del producto
+				<article class="col-12 col-lg-8 product-detail-info">
+					<img src="./images/products/default-image.png" alt="" class="product-detail-img">
+					<p class="product-detail-description">
+						<%= productos[i].descripcion %> </p> 	 productos[i] es por el prod en particular, nose si esta bien porque no hay un for que lo corra
+				</article>
+				-->
+
 				<div class="col-12 col-lg-4">
 					<section class="comments">
+
+						<!-- la estructura de todos los comentarios puede estar dentro de un for que corra el largo de cant de comentarios, y en cada iteración complete con la info del usuario. Ej: 
+
+						<% for(let i = 0; i < productos[i].comentarios; i++) { %> 	 productos[i] es por el prod en particular, nose si esta bien porque no hay un for que lo corra
+
+							<article>
+								<img src="https://via.placeholder.com/35" alt="">
+								<div class="data">
+									<p class="user">
+										<strong> <a href="profile.html"> <%= productos.comentario[i].comentador %> </a> </strong>
+										<%= productos.comentario[i].comentario %> </p>
+								</div>
+							</article>
+
+						<% } %>
+						-->
+
 						<article>
 							<img src="https://via.placeholder.com/35" alt="">
 							<div class="data">
@@ -85,6 +112,21 @@
 					<form class="form" action="" method="POST">
 						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
 						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
+					</form>
+					<!-- qué formulario dejamos? -->
+					<form action="" method="GET">
+
+						<label for="nombreUsuario">Nombre de usuario:</label>
+						<input type="text" id="nombreUsuario" name="nombreUsuario" value="" required>
+						
+						<label for="comentario">Comentario:</label>
+						<textarea name="comentario" id="comentario" required></textarea>
+
+						<label for="imagenPerfil">Imagen de perfil:</label><br>
+						<input type="file" id="imagenPerfil" name="imagenPerfil" required>
+
+						<button type="submit">Enviar comentario</button>
+
 					</form>
 					<hr>
 				</div>
