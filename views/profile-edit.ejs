@@ -14,6 +14,11 @@
 	<link rel="stylesheet" href="/stylesheets/bootstrap-grid.min.css">
 	<!-- Own Stylesheet -->
 	<link rel="stylesheet" href="/stylesheets/style.css">
+	<!-- Tipografia -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway&display=swap" rel="stylesheet">
+	
 </head>
 
 <body>
@@ -25,31 +30,31 @@
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="products-title">Editar mi perfil</h2>
+				<h2 class="tipografia-products-title">Editar mi perfil</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
 
 			<form class="login" action="" method="GET"> <!-- el action queda para la 2da parte de la materia. --> 
 
-				<label for="email">Email:</label>
+				<label for="email" class="tipografia-products">Email:</label>
 				<input type="email" name="email" id="email">
 
-				<label for="usuario">Usuario:</label>
+				<label for="usuario" class="tipografia-products">Usuario:</label>
 				<input type="text" name="usuario" id="usuario">
 
-				<label for="contrasenia">Contraseña:</label>
+				<label for="contrasenia" class="tipografia-products">Contraseña:</label>
 				<input type="password" name="contrasenia" id="contrasenia">
 
-				<label for="birthday">Fecha de Nacimiento:</label>
+				<label for="birthday" class="tipografia-products">Fecha de Nacimiento:</label>
 				<input type="text" name="birthday" id="birthday">
 
-				<label for="DNI">DNI:</label>
+				<label for="DNI" class="tipografia-products">DNI:</label>
 				<input type="number" name="DNI" id="DNI">
 
-				<label for="profilePic">Foto de Perfil:</label>
-				<input type="file" name="profilePic" id="profilePic">
+				<label for="profilePic" class="tipografia-products">Foto de Perfil:</label>
+				<input class="tipografia-products" type="file" name="profilePic" id="profilePic">
 
-				<input class="done" type="submit" value="Edita tu perfil">
+				<input class="tipografia-products" class="done" type="submit" value="Edita tu perfil">
 
 			</form>
 

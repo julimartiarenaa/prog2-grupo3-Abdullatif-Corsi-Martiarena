@@ -14,6 +14,11 @@
 	<link rel="stylesheet" href="/stylesheets/bootstrap-grid.min.css">
 	<!-- Own Stylesheet -->
 	<link rel="stylesheet" href="/stylesheets/style.css">
+	<!-- Tipografia -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -25,19 +30,19 @@
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="products-title">Agregar productos</h2>
+				<h2 class="tipografia-products-title" >Agregar productos</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
 			<form class="login" action= "/" method="GET">  <!-- el action queda para la 2da parte de la materia. --> 
-				<label for="imagen">Imagen:</label>
-				<input type="file" id="imagen" name="imagen" required>
+				<label for="imagen" class="tipografia-products">Imagen:</label>
+				<input class="tipografia-products" type="file" id="imagen" name="imagen" required>
 			
-				<label for="nombre">Nombre del Producto:</label>
+				<label for="nombre" class="tipografia-products">Nombre del Producto:</label>
 				<input type="text" id="nombre" name="nombre" required>
 			
-				<label for="descripcion">Descripción:</label>
+				<label for="descripcion" class="tipografia-products">Descripción:</label>
 				<textarea id="descripcion" name="descripcion"  cols="50" rows="15" required></textarea>
-				<input class="done" type="submit" value="Crear Producto">
+				<input class="tipografia-products" class="done" type="submit" value="Crear Producto">
 			</form>
 
 

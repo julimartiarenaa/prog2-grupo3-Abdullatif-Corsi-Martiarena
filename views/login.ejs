@@ -14,6 +14,11 @@
 	<link rel="stylesheet" href="/stylesheets/bootstrap-grid.min.css">
 	<!-- Own Stylesheet -->
 	<link rel="stylesheet" href="/stylesheets/style.css">
+	<!-- Tipografia -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -25,19 +30,19 @@
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="products-title">Ingresar</h2>
+				<h2 class="tipografia-products-title">Ingresar</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
 			<form class="login" action="/" method="GET">
-				<label for="usuario">Usuario:</label>
+				<label for="usuario" class="tipografia-products">Usuario:</label>
 				<input type="email" id="usuario" name="usuario" required>
 		
-				<label for="contraseña">Contraseña:</label>
+				<label for="contraseña" class="tipografia-products">Contraseña:</label>
 				<input type="password" id="contraseña" name="contraseña" required>
 		
-				<span>Recordarme</span><input type="checkbox" id="recordarme" name="recordarme">
+				<span class="tipografia-products" >Recordarme</span><input type="checkbox" id="recordarme" name="recordarme">
 
-				<input class="done" type="submit" value="Ingresar">
+				<input class="tipografia-products" class="done" type="submit" value="Ingresar">
 				
 			</form>
 		
