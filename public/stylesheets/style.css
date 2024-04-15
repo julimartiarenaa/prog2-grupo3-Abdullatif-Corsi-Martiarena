@@ -528,3 +528,20 @@ textarea.form-input {
     margin: auto;
   }
 }
+
+.done{
+  padding: 0.5%;
+}
+
+.login{
+  display: flex;
+  flex-direction: column;
+  font-size: medium;
+  align-items: flex-start;
+  padding-left: 2%;
+}
+
+.login input{
+  margin-bottom: 1%;
+  margin-top: 0.5%;
+}

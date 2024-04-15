@@ -11,9 +11,9 @@
 	<!-- Font Awesome Stylesheet -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 	<!-- Bootstrap Grid Stylesheet -->
-	<link rel="stylesheet" href="./css/bootstrap-grid.min.css">
+	<link rel="stylesheet" href="./stylesheets/bootstrap-grid.min.css">
 	<!-- Own Stylesheet -->
-	<link rel="stylesheet" href="./stylesheets/style.css">
+	<link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
@@ -28,22 +28,16 @@
 				<h2 class="products-title">Agregar productos</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
-			<h2 class="col-12"> <i>///////////////////////////////////////// <br> Acá va el formulario para agregar prodcutos al catálogo. <br>
-			Debe cumplir con los puntos de la consigna y ser coherente con la tabla de la base de datos. <br>
-			Eliminen estás líneas y coloquen el formulario. <br>
-			Recuerden todo lo que necesita tanto la etiqueta form como los campos input para operar correctamtente</i> <br>
-			////////////////
-			</h2>
-			<form action="" method="GET">
-				<label for="imagenProducto">Imagen:</label><br>
-				<input type="file" id="imagenProducto" name="imagenProducto" required>
+			<form class="login" method="GET">
+				<label for="imagen">Imagen:</label>
+				<input type="file" id="imagen" name="imagen" required>
 			
-				<label for="nombreProducto">Nombre del Producto:</label><br>
-				<input type="text" id="nombreProducto" name="nombreProducto" required>
+				<label for="nombre">Nombre del Producto:</label>
+				<input type="text" id="nombre" name="nombre" required>
 			
-				<label for="descripcion">Descripción:</label><br>
-				<textarea id="descripcion" name="descripcion"  cols="30" rows="10" required></textarea>
-				<button type="submit">Crear producto</button>
+				<label for="descripcion">Descripción:</label>
+				<textarea id="descripcion" name="descripcion"  cols="50" rows="15" required></textarea>
+				<input class="done" type="submit" value="Crear Producto">
 			</form>
 
 
