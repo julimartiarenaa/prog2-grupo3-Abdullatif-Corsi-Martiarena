@@ -51,6 +51,11 @@ const datos = {
                 imagenPerfil: "/images/users/comentador.jpeg"
             },
             {
+                comentador: "Usuario3",
+                comentario: "¡holaaa!",
+                imagenPerfil: "/images/users/comentador.jpeg"
+            },
+            {
                 comentador: "Usuario6",
                 comentario: "¡La calidad de las fotos es asombrosa!",
                 imagenPerfil: "/images/users/comentadora.jpeg"
