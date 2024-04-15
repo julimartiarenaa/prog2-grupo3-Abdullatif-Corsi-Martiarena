@@ -1,12 +1,15 @@
 const datos = require("../db/index")
-const datosU = datos.usuario
 
 const profileController = {
     profile: function (req, res) {
-        return res.render ('profile', {datosU: datosU})
+        let productos = datos.productos
+        let usuario = datos.usuario
+        res.render("profile", {productos: productos, usuario: usuario})    
     }, 
     editProfile: function (req,res) {
-        return res.render ('profile-edit', {datos: datosU})
+        let productos = datos.productos
+        let usuario = datos.usuario
+        res.render("profile-edit", {productos: productos, usuario: usuario})
     }
 };
 
