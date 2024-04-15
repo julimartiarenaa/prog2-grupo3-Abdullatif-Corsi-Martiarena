@@ -13,6 +13,11 @@
 	<link rel="stylesheet" href="/stylesheets/bootstrap-grid.min.css">
 	<!-- Own Stylesheet -->
 	<link rel="stylesheet" href="/stylesheets/style.css">
+	<!-- Tipografia -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway&display=swap" rel="stylesheet">
+	
 </head>
 <body>
 	<!-- Header -->
@@ -27,16 +32,16 @@
 			</div>
 			<div class="data-container col-6">
 				<div class="d-flex align-items-center ">
-					<h1 class="main-title"> <%= usuario.nUsuario%> 
+					<h1 class="tipografia-products-title"> <%= usuario.nUsuario%> 
 						<a href="/profile/profile-edit">
 							<i class="fas fa-cog"></i>
 						</a>
 					</h1>
 					<a class="btn mt-3 ml-4" href="">SEGUIR</a>
 				</div>
-				<p><%= usuario.email%></p>
+				<p class="tipografia-products"><%= usuario.email%></p>
 				<div>
-					<ul class="">
+					<ul class="tipografia-products">
 						<li>8 productos</li>
 						<li>200 seguidores</li>
 						<li>300 comentarios</li>
