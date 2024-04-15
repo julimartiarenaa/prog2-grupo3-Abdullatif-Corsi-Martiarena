@@ -38,6 +38,25 @@
 			<!-- Show the "ultimos" products -->
 
 			<!-- acá empieza el for que corre todos los productos. EJ: -->
+
+			<% for(let i = 0; i < 4; i++) { %>
+
+				<div class="col-12 col-sm-6 col-lg-3">
+					<section class="product-box">
+						<a href="product">
+							<figure class="product-box_image">
+								<img src=<%= productos[i].imagenProducto %> alt=<%= productos[i].nombreProducto %> > 
+							</figure>
+							<article class="product-box_data">
+								<h2><%= productos[i].nombreProducto %></h2>
+								<p><%= productos[i].descripcion %></p>
+								<p>Comentarios: <%= productos[i].comentarios.length %></p>
+							</article>
+						</a>
+					</section>
+				</div>
+
+			<% } %>
 			
 		
 			<div class="col-12 col-sm-6 col-lg-3">
@@ -109,62 +128,26 @@
 				<h2 class="tipografia-products-title">Más comentados</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="product.html">
-						<figure class="product-box_image">
-							<img src="images/products/default-image.png" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2 class="tipografia-products">Nombre del producto</h2>
-							<p class="tipografia-products">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque delectus ex</p>
-							<p class="tipografia-products">Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="product.html">
-						<figure class="product-box_image">
-							<img src="images/products/default-image.png" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2 class="tipografia-products">Nombre del producto</h2>
-							<p class="tipografia-products">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque delectus ex</p>
-							<p class="tipografia-products">Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="product.html">
-						<figure class="product-box_image">
-							<img src="images/products/default-image.png" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2 class="tipografia-products">Nombre del producto</h2>
-							<p class="tipografia-products">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque delectus ex</p>
-							<p class="tipografia-products">Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="product.html">
-						<figure class="product-box_image">
-							<img src="images/products/default-image.png" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2 class="tipografia-products">Nombre del producto</h2>
-							<p class="tipografia-products">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque delectus ex</p>
-							<p class="tipografia-products">Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-			</div>
+			
+			<% for(let i = 0; i < 4; i++) { %>
+
+				<div class="col-12 col-sm-6 col-lg-3">
+					<section class="product-box">
+						<a href="product">
+							<figure class="product-box_image">
+								<img src=<%= productos[i].imagenProducto %> alt=<%= productos[i].nombreProducto %> > 
+							</figure>
+							<article class="product-box_data">
+								<h2><%= productos[i].nombreProducto %></h2>
+								<p><%= productos[i].descripcion %></p>
+								<p>Comentarios: <%= productos[i].comentarios.length %></p>
+							</article>
+						</a>
+					</section>
+				</div>
+
+			<% } %>
+
 		</div>
 	</div>
 	<!-- /Más comentados -->
