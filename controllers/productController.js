@@ -7,7 +7,8 @@ const productController = {
     },
     addProduct: function (req, res) {
         let productos = datos.productos
-        res.render("product-add", {productos: productos})
+        let usuario = datos.usuario
+        res.render("product-add", {productos: productos, usuario: usuario})
     }
 }
 
