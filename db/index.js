@@ -21,7 +21,7 @@ const datos = {
             {
                 comentador: "Usuario2",
                 comentario: "El diseño es simplemente hermoso.",
-                imagenPerfil: "/images/users/comentadora.jpeg"
+                imagenPerfil: "/images/users/comentadora.jpg"
             }]
     },
     {
@@ -37,7 +37,7 @@ const datos = {
             {
                 comentador: "Usuario4",
                 comentario: "La duración de la batería es sorprendentemente buena para su tamaño.",
-                imagenPerfil: "/images/users/comentadora.jpeg"
+                imagenPerfil: "/images/users/comentadora.jpg"
             }]
     },
     {
@@ -51,14 +51,9 @@ const datos = {
                 imagenPerfil: "/images/users/comentador.jpeg"
             },
             {
-                comentador: "Usuario3",
-                comentario: "¡holaaa!",
-                imagenPerfil: "/images/users/comentador.jpeg"
-            },
-            {
                 comentador: "Usuario6",
                 comentario: "¡La calidad de las fotos es asombrosa!",
-                imagenPerfil: "/images/users/comentadora.jpeg"
+                imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
     },
@@ -75,7 +70,7 @@ const datos = {
             {
                 comentador: "Usuario8",
                 comentario: "Me encanta su tamaño, perfecto para usar con una mano.",
-                imagenPerfil: "/images/users/comentadora.jpeg"
+                imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
     },
@@ -92,7 +87,7 @@ const datos = {
             {
                 comentador: "Usuario10",
                 comentario: "Las fotos nocturnas son asombrosas.",
-                imagenPerfil: "/images/users/comentadora.jpeg"
+                imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
     },
@@ -109,7 +104,7 @@ const datos = {
             {
                 comentador: "Usuario12",
                 comentario: "No estoy impresionado con la calidad de la pantalla.",
-                imagenPerfil: "/images/users/comentadora.jpeg"
+                imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
     },
@@ -126,7 +121,7 @@ const datos = {
             {
                 comentador: "Usuario14",
                 comentario: "He experimentado problemas de conectividad intermitente.",
-                imagenPerfil: "/images/users/comentadora.jpeg"
+                imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
     },
@@ -143,7 +138,7 @@ const datos = {
             {
                 comentador: "Usuario16",
                 comentario: "Me decepciona que no tenga carga inalámbrica.",
-                imagenPerfil: "/images/users/comentadora.jpeg"
+                imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
     },
@@ -160,7 +155,7 @@ const datos = {
             {
                 comentador: "Usuario18",
                 comentario: "La duración de la batería no cumple con mis expectativas, se descarga rápidamente.",
-                imagenPerfil: "/images/users/comentadora.jpeg"
+                imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
     },
@@ -177,7 +172,7 @@ const datos = {
             {
                 comentador: "Usuario20",
                 comentario: "La calidad de construcción no es tan sólida como esperaba, se siente un poco frágil.",
-                imagenPerfil: "/images/users/comentadora.jpeg"
+                imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
     }]

@@ -29,7 +29,7 @@
 		<div class="d-flex align-items-center">
 			<h2 class="products-title">Nombre del producto</h2> 
 			<p class="product-detail-description">
-				<a href="product-add">Editar</a> 
+				<a href="/product/product-add">Editar</a> 
 			</p>
 		</div>
 		<div class="product-detail">
@@ -38,42 +38,32 @@
                 <article class="col-12 col-lg-8 product-detail-info">
                     <img src=<%= productos[0].imagenProducto %> alt=<%= productos[0].nombreProducto %>  class="product-detail-img">
                     <p class="product-detail-description">
-                        <%= productos[0].descripcion %> </p>     
+                        <%= productos[0].descripcion %> 
+					</p>     
                 </article>
 
 				<div class="col-12 col-lg-4">
 					<section class="comments">
-
-						<% for(let i = 0; i < productos[0].comentarios; i++) { %>    
+					
+						<% for(let i = 0; i < productos[0].comentarios.length; i++) { %>    
                             <article>
-                                <img src=<%= productos[0].imagenProducto %> alt=<%= productos[0].nombreProducto %> >
+                                <img src=<%= productos[0].comentarios[i].imagenPerfil %> alt=<%= productos[0].nombreProducto %> >
                                 <div class="data">
                                     <p class="user">
-                                        <strong> <a href="profile"> <%= productos[0].comentario[i].comentador %> </a> </strong>
-                                        <%= productos[0].comentario[i] %> </p>
+                                        <strong> <a href="profile"> <%= productos[0].comentarios[i].comentador %> </a> </strong>
+                                        <%= productos[0].comentarios[i].comentario %> 
+									</p>
                                 </div>
                             </article>
                         <% } %>
 
 					</section>
-					<!-- FORM DEL MAQUETADO
-					<form class="form" action="" method="POST">
-						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
-						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
-					</form>
-					-->
-					<form class="login" action="" method="GET"> 
-
-						<label for="nombreUsuario">Nombre de usuario:</label>
-						<input type="text" id="nombreUsuario" name="nombreUsuario" value="" required>
+					
+					<form class="form" action="" method="GET"> 
 						
-						<label for="comentario">Comentario:</label>
-						<textarea name="comentario" id="comentario" required></textarea>
+						<input class="form-input" type="text" name="comentario" value="" placeholder="Agregar comentario">
 
-						<label for="imagenPerfil">Imagen de perfil:</label><br>
-						<input type="file" id="imagenPerfil" name="imagenPerfil" required>
-
-						<button type="submit">Enviar comentario</button>
+						<button class="buy-now-button" type="submit">Enviar comentario</button>
 
 					</form>
 					<hr>
