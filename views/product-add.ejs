@@ -5,9 +5,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link width="" rel="shortcut icon" href="./images/logo-mercado-liebre.jpg" />
+	<link width="" rel="shortcut icon" href="./images/imgTI.png" />
 
-	<title> Mercado Liebre Argentina</title>
+	<title> Smart Market</title>
 	<!-- Font Awesome Stylesheet -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 	<!-- Bootstrap Grid Stylesheet -->
@@ -30,19 +30,20 @@
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="tipografia-products-title" >Agregar productos</h2>
+				<h2 class="products-title" >Agregar productos</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
 			<form class="login" action= "/" method="GET">  <!-- el action queda para la 2da parte de la materia. --> 
-				<label for="imagen" class="tipografia-products">Imagen:</label>
-				<input class="tipografia-products" type="file" id="imagen" name="imagen" required>
+				
+				<label for="imagen">Imagen:</label>
+				<input type="file" id="imagen" name="imagen" required>
 			
-				<label for="nombre" class="tipografia-products">Nombre del Producto:</label>
+				<label for="nombre">Nombre del Producto:</label>
 				<input type="text" id="nombre" name="nombre" required>
 			
-				<label for="descripcion" class="tipografia-products">Descripción:</label>
+				<label for="descripcion" >Descripción:</label>
 				<textarea id="descripcion" name="descripcion"  cols="50" rows="15" required></textarea>
-				<input class="tipografia-products" class="done" type="submit" value="Crear Producto">
+				<input  class="done" type="submit" value="Crear Producto">
 			</form>
 
 

@@ -5,7 +5,7 @@ const datos = {
         email: 'pepitadepepito@gmail.com',
         fechaNacimiento:'24/04/2000',
         dni: 42585930,
-        fotoPerfil: "/images/users/default-image.png"
+        fotoPerfil: "/images/users/profile.jpg"
         },
     
     productos: [{
