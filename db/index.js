@@ -3,14 +3,14 @@ const datos = {
         nUsuario: 'Pepita',
         contrasenia: 'pepitalomas123',
         email: 'pepitadepepito@gmail.com',
-        fechaNacimiento:'24/04/2000',
+        fechaNacimiento: '24/04/2000',
         dni: 42585930,
         fotoPerfil: "/images/users/profile.jpg"
-        },
-    
+    },
+
     productos: [{
         nombreProducto: "iPhone 13 Pro Max",
-        imagenProducto: "/images/products/iphone_13_pro_max.jpg", 
+        imagenProducto: "/images/products/iphone_13_pro_max.jpg",
         descripcion: "El iPhone 13 Pro Max es el modelo más avanzado de Apple hasta la fecha, con su potente chip A15 Bionic, una impresionante pantalla Super Retina XDR y cámaras profesionales.",
         comentarios: [
             {
@@ -26,7 +26,7 @@ const datos = {
             {
                 comentador: "Usuario3",
                 comentario: "La pantalla es simplemente deslumbrante, cada detalle se ve increíblemente nítido y los colores son vibrantes.",
-                imagenPerfil: "/images/users/comentadora.jpg" 
+                imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
     },
@@ -69,7 +69,7 @@ const datos = {
             },
             {
                 comentador: "Usuario7",
-                comentario: "La mejora en la duración de la batería es notable y la calidad de la cámara es excepcional",
+                comentario: " La mejora en la duración de la batería es notable y la calidad de la cámara es excepcional",
                 imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
@@ -91,7 +91,7 @@ const datos = {
             },
             {
                 comentador: "Usuario9",
-                comentario: "¡Una excelente opción para aquellos que buscan un iPhone potente y compacto!",
+                comentario: " ¡Una excelente opción para aquellos que buscan un iPhone potente y compacto!",
                 imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
@@ -136,7 +136,7 @@ const datos = {
             {
                 comentador: "Usuario13",
                 comentario: "La calidad de la cámara es decente, pero podría quedarse un poco atrás en condiciones de poca luz.",
-                imagenPerfil: "/images/users/comentador.jpg"
+                imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
     },
@@ -156,9 +156,9 @@ const datos = {
                 imagenPerfil: "/images/users/comentadora.jpg"
             },
             {
-                comentador: "Usuario14",
+                comentador: "Usuario15",
                 comentario: "Todo funciona de manera suave y rápida.",
-                imagenPerfil: "/images/users/comentador.jpg"
+                imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
     },
@@ -180,7 +180,7 @@ const datos = {
             {
                 comentador: "Usuario17",
                 comentario: "Su diseño elegante y su construcción robusta lo hacen sentir premium en la mano.",
-                imagenPerfil: "/images/users/comentador.jpg"
+                imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
     },
@@ -222,14 +222,13 @@ const datos = {
                 imagenPerfil: "/images/users/comentadora.jpg"
             },
             {
-            comentador: "Usuario18",
-            comentario: "Una verdadera joya en su rango de precios.",
-            imagenPerfil: "/images/users/comentadora.jpg"
+                comentador: "Usuario21",
+                comentario: "Una verdadera joya en su rango de precios.",
+                imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
     }]
-    
+
 
 }
-// Revisar los nombres de usuario e imagen en el apartado comentarios de producto //
 module.exports = datos
