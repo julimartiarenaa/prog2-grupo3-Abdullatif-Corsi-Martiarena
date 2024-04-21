@@ -22,7 +22,13 @@ const datos = {
                 comentador: "Usuario2",
                 comentario: "El diseño es simplemente hermoso.",
                 imagenPerfil: "/images/users/comentadora.jpg"
-            }]
+            },
+            {
+                comentador: "Usuario3",
+                comentario: "La pantalla es simplemente deslumbrante, cada detalle se ve increíblemente nítido y los colores son vibrantes.",
+                imagenPerfil: "/images/users/comentadora.jpg" 
+            }
+        ]
     },
     {
         nombreProducto: "iPhone 12 Mini",
@@ -38,7 +44,13 @@ const datos = {
                 comentador: "Usuario4",
                 comentario: "La duración de la batería es sorprendentemente buena para su tamaño.",
                 imagenPerfil: "/images/users/comentadora.jpg"
-            }]
+            },
+            {
+                comentador: "Usuario5",
+                comentario: "¡Definitivamente recomiendo este dispositivo para quienes prefieren un teléfono más pequeño sin comprometer la experiencia!",
+                imagenPerfil: "/images/users/comentador.jpeg"
+            }
+        ]
     },
     {
         nombreProducto: "iPhone 13",
@@ -53,6 +65,11 @@ const datos = {
             {
                 comentador: "Usuario6",
                 comentario: "¡La calidad de las fotos es asombrosa!",
+                imagenPerfil: "/images/users/comentadora.jpg"
+            },
+            {
+                comentador: "Usuario7",
+                comentario: "La mejora en la duración de la batería es notable y la calidad de la cámara es excepcional",
                 imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
@@ -71,6 +88,11 @@ const datos = {
                 comentador: "Usuario8",
                 comentario: "Me encanta su tamaño, perfecto para usar con una mano.",
                 imagenPerfil: "/images/users/comentadora.jpg"
+            },
+            {
+                comentador: "Usuario9",
+                comentario: "¡Una excelente opción para aquellos que buscan un iPhone potente y compacto!",
+                imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
     },
@@ -87,6 +109,11 @@ const datos = {
             {
                 comentador: "Usuario10",
                 comentario: "Las fotos nocturnas son asombrosas.",
+                imagenPerfil: "/images/users/comentadora.jpg"
+            },
+            {
+                comentador: "Usuario11",
+                comentario: "A pesar de tener un excelente rendimiento general, su pantalla LCD puede no estar a la altura de las expectativas de aquellos que buscan la calidad de visualización de las pantallas OLED",
                 imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
@@ -105,6 +132,11 @@ const datos = {
                 comentador: "Usuario12",
                 comentario: "No estoy impresionado con la calidad de la pantalla.",
                 imagenPerfil: "/images/users/comentadora.jpg"
+            },
+            {
+                comentador: "Usuario13",
+                comentario: "La calidad de la cámara es decente, pero podría quedarse un poco atrás en condiciones de poca luz.",
+                imagenPerfil: "/images/users/comentador.jpg"
             }
         ]
     },
@@ -122,6 +154,11 @@ const datos = {
                 comentador: "Usuario14",
                 comentario: "He experimentado problemas de conectividad intermitente.",
                 imagenPerfil: "/images/users/comentadora.jpg"
+            },
+            {
+                comentador: "Usuario14",
+                comentario: "Todo funciona de manera suave y rápida.",
+                imagenPerfil: "/images/users/comentador.jpg"
             }
         ]
     },
@@ -139,6 +176,11 @@ const datos = {
                 comentador: "Usuario16",
                 comentario: "Me decepciona que no tenga carga inalámbrica.",
                 imagenPerfil: "/images/users/comentadora.jpg"
+            },
+            {
+                comentador: "Usuario17",
+                comentario: "Su diseño elegante y su construcción robusta lo hacen sentir premium en la mano.",
+                imagenPerfil: "/images/users/comentador.jpg"
             }
         ]
     },
@@ -155,6 +197,11 @@ const datos = {
             {
                 comentador: "Usuario18",
                 comentario: "La duración de la batería no cumple con mis expectativas, se descarga rápidamente.",
+                imagenPerfil: "/images/users/comentadora.jpg"
+            },
+            {
+                comentador: "Usuario19",
+                comentario: "La capacidad de la cámara es impresionante.",
                 imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
@@ -173,6 +220,11 @@ const datos = {
                 comentador: "Usuario20",
                 comentario: "La calidad de construcción no es tan sólida como esperaba, se siente un poco frágil.",
                 imagenPerfil: "/images/users/comentadora.jpg"
+            },
+            {
+            comentador: "Usuario18",
+            comentario: "Una verdadera joya en su rango de precios.",
+            imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
     }]
