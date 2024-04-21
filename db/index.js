@@ -69,7 +69,7 @@ const datos = {
             },
             {
                 comentador: "Usuario7",
-                comentario: " La mejora en la duración de la batería es notable y la calidad de la cámara es excepcional",
+                comentario: "La mejora en la duración de la batería es notable y la calidad de la cámara es excepcional",
                 imagenPerfil: "/images/users/comentadora.jpg"
             }
         ]
