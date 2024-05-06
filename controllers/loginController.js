@@ -1,9 +1,15 @@
 const datos = require("../db/index")
+let db = require("../database/models")
 
 const loginController = {
     login: function (req, res) {
-        let usuario = datos.usuario
-        res.render("login", {usuario: usuario})
+
+        db.Usuario.findAll()
+            .then(function(data))
+                return  res.send(data)
+
+        //let usuario = datos.usuario
+        //res.render("login", {usuario: usuario})
     }
 }
 
