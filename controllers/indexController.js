@@ -1,9 +1,17 @@
+let db = require("../database/models")
 const datos = require("../db/index")
 let productos = datos.productos
 
 const indexController = { 
     product: function (req, res) {
-        res.render("index", {productos: productos})
+        db.Producto.findAll()
+            .then(function (data) {
+                return res.send(data)
+            })
+            .catch(function (error) {
+                return console.log(error)
+            })
+        // res.render("index", {productos: productos})
     }
 }
 
