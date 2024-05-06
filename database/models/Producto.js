@@ -16,7 +16,7 @@ module.exports = function (sequelize, dataTypes) {
             type: dataTypes.string
         },
         descripcion: {
-            type: dataTypes.string(500)
+            type: dataTypes.STRING(500)
         }
     }
     let config = {
