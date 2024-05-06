@@ -7,8 +7,10 @@ const profileController = {
         let productos = datos.productos
 
         db.Usuario.findAll()
-        .then(function(data))
+        .then(function(data){
             return  res.send(data)
+        }
+        )
 
         //let usuario = datos.usuario
         //res.render("profile", {productos: productos, usuario: usuario})    

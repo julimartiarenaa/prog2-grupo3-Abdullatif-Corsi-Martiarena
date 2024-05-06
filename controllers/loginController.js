@@ -5,8 +5,10 @@ const loginController = {
     login: function (req, res) {
 
         db.Usuario.findAll()
-            .then(function(data))
+            .then(function(data){
                 return  res.send(data)
+            }
+            )
 
         //let usuario = datos.usuario
         //res.render("login", {usuario: usuario})
