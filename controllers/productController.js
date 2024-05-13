@@ -2,6 +2,16 @@ const db = require("../database/models")
 let dbProducto = db.Producto;
 
 const productController = {
+    index:  function (req, res) {
+        dbProducto.findAll()
+            .then(function (productos) {
+                res.render("index", {productos: productos})
+            })
+            .catch(function (error) {
+                return console.log(error)
+            })
+
+    },
     product: function (req, res) {
         dbProducto.findAll() //CAMBIOS
             .then(function (data) {
