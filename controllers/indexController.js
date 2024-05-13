@@ -1,12 +1,12 @@
 let db = require("../database/models")
 const datos = require("../db/index")
-let productos = datos.productos
+
 
 const indexController = { 
     product: function (req, res) {
         db.Producto.findAll()
-            .then(function (data) {
-                return res.send(data)
+            .then(function (productos) {
+                res.render("index", {productos: productos})
             })
             .catch(function (error) {
                 return console.log(error)

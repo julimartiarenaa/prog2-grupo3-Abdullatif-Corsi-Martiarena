@@ -3,7 +3,7 @@ let dbProducto = db.Producto;
 
 const productController = {
     product: function (req, res) {
-        dbProducto.Producto.findAll()
+        dbProducto.findAll() //CAMBIOS
             .then(function (data) {
                 return res.send(data)
             })
@@ -13,7 +13,7 @@ const productController = {
         //res.render("product", {productos: productos})
     },
     addProduct: function (req, res) {
-        dbProducto.Producto.findAll()
+        dbProducto.findAll() //CAMBIOS
         .then(function (data) {
             return res.send(data)
         })

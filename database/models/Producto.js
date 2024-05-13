@@ -10,10 +10,10 @@ module.exports = function (sequelize, dataTypes) {
             type: dataTypes.INTEGER
         },
         url_imagen: {
-            type: dataTypes.string
+            type: dataTypes.STRING
         },
         nombre: {
-            type: dataTypes.string
+            type: dataTypes.STRING
         },
         descripcion: {
             type: dataTypes.STRING(500)
