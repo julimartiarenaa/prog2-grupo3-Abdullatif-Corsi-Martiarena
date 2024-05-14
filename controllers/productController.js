@@ -2,7 +2,7 @@ const db = require("../database/models")
 let dbProducto = db.Producto;
 
 const productController = {
-    index:  function (req, res) {
+    index: function (req, res) {
         dbProducto.findAll()
             .then(function (productos) {
                 res.render("index", {productos: productos})

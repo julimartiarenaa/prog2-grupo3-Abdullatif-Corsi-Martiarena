@@ -69,7 +69,7 @@ INSERT INTO comentarios
 VALUES
 (default, 1, 1, "¡Increíble rendimiento y calidad de cámara!", "comentadora.jpg", null, null, null),
 (default, 1, 2, "El diseño es simplemente hermoso.", "comentadora.jpg", null, null, null),
-(default, 1, 3, "La pantalla es simplemente deslumbrante, cada detalle se ve increíblemente nítido y los colores son vibrantes.", null, null, null),
+(default, 1, 3, "La pantalla es simplemente deslumbrante, cada detalle se ve increíblemente nítido y los colores son vibrantes.","comentadora.jpg", null, null, null),
 (default, 2, 3, "¡Es tan lindo y fácil de manejar!", "comentador.jpeg", null, null, null),
 (default, 2, 4, "La duración de la batería es sorprendentemente buena para su tamaño.", "comentadora.jpg", null, null, null),
 (default, 2, 5, "¡Definitivamente recomiendo este dispositivo para quienes prefieren un teléfono más pequeño sin comprometer la experiencia!", "comentadora.jpg", null, null, null),
