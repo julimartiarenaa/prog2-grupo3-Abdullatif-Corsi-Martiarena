@@ -12,9 +12,19 @@ const userController = {
         let usuario = datos.usuario
         res.render("profile-edit", {productos: productos, usuario: usuario})
     },
-    register: function (req, res) {
-        let datosUsuario = datos.usuario;
-        return res.render ('register', {datosUsuario: datosUsuario})
+    registerCreate: function (req, res) {
+
+        return res.render ('register')
+
+    },
+    registerStore: function(req, res) {
+        let form = req.body;
+        db.Usuario.create(form)
+        .then(function(result){
+            console.log("estoy en el then")
+            return res.redirect("/")
+        })
+        .catch(error=> console.log(error))
     },
     login: function (req, res) {
         let usuario = datos.usuario

@@ -32,6 +32,18 @@ module.exports = function(sequelize, dataTypes) {
 
         foto_perfil: {
             type: dataTypes.STRING
+        },
+
+        createdAt: {
+            type: timestamps
+        },
+
+        updatedAt : {
+            type: timestamps
+        },
+
+        deletedAt: {
+            type: timestamps
         }
 
     }
