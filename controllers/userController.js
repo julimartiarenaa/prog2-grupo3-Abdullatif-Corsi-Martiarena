@@ -15,8 +15,8 @@ const userController = {
     registerCreate: function (req, res) {
 
         return res.render ('register')
-
     },
+
     registerStore: function(req, res) {
         let form = req.body;
         db.Usuario.create(form)
@@ -26,6 +26,7 @@ const userController = {
         })
         .catch(error=> console.log(error))
     },
+    
     login: function (req, res) {
         let usuario = datos.usuario
         res.render("login", {usuario: usuario})

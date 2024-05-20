@@ -35,15 +35,15 @@ module.exports = function(sequelize, dataTypes) {
         },
 
         createdAt: {
-            type: timestamps
+            type: dataTypes.DATE
         },
 
         updatedAt : {
-            type: timestamps
+            type: dataTypes.DATE
         },
 
         deletedAt: {
-            type: timestamps
+            type: dataTypes.DATE
         }
 
     }
@@ -52,7 +52,7 @@ module.exports = function(sequelize, dataTypes) {
 
         tableName: "usuarios",
         timestamps: true,
-        underscored: true
+        underscored: false
 
     }
 

@@ -17,12 +17,23 @@ module.exports = function (sequelize, dataTypes) {
         },
         url_foto_perfil: {
             type: dataTypes.STRING(100)
+        },
+        createdAt: {
+            type: dataTypes.DATE
+        },
+
+        updatedAt : {
+            type: dataTypes.DATE
+        },
+
+        deletedAt: {
+            type: dataTypes.DATE
         }
     };
     let config = {
         tableName: 'comentarios',
         timestamps: true,
-        underscored: true
+        underscored: false
     };
 
     let Comentario = sequelize.define(alias, cols, config);
