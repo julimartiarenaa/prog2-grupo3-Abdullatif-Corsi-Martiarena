@@ -97,3 +97,44 @@ VALUES
 (default, 10, 1, "Estoy impresionado con el rendimiento fluido y la capacidad de la batería.", "comentador.jpeg", null, null, null),
 (default, 10, 4, "La calidad de construcción no es tan sólida como esperaba, se siente un poco frágil.", "comentadora.jpg", null, null, null),
 (default, 10, 3, "Una verdadera joya en su rango de precios.", "comentadora.jpg", null, null, null);
+
+
+UPDATE productos 
+SET url_imagen = '/images/products/iphone_13_pro_max.jpg'
+WHERE id = 1;
+
+UPDATE productos 
+SET url_imagen = '/images/products/iphone_12_mini.jpg'
+WHERE id = 2;
+
+UPDATE productos 
+SET url_imagen = '/images/products/iphone_13.jpg'
+WHERE id = 3;
+
+UPDATE productos 
+SET url_imagen = '/images/products/iphone_se_2020.jpg'
+WHERE id = 4;
+
+UPDATE productos 
+SET url_imagen = '/images/products/iphone_11_pro.jpg'
+WHERE id = 5;
+
+UPDATE productos 
+SET url_imagen = '/images/products/iphone_xr.jpg'
+WHERE id = 6;
+
+UPDATE productos 
+SET url_imagen = '/images/products/iphone_xs.jpg'
+WHERE id = 7;
+
+UPDATE productos 
+SET url_imagen = '/images/products/iphone_8_plus.jpg'
+WHERE id = 8;
+
+UPDATE productos 
+SET url_imagen = '/images/products/samsung_s21_ultra.jpg'
+WHERE id = 9;
+
+UPDATE productos 
+SET url_imagen = '/images/products/samsung_a52.jpg'
+WHERE id = 10;
