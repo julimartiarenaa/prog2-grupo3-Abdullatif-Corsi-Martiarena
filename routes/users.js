@@ -25,6 +25,22 @@ let loginValidations = [
       
 ]
 
+const registerValidations = [
+    body('email')
+        .notEmpty().withMessage('Por favor complete el campo email.')
+        .isEmail().withMessage('Por favor ingrese un email válido.')
+        //.custom(function (value) {
+        //    return db.Usuario.findOne({
+        //        where: {email: value}
+        //    })
+        //    .then(function (usuario) {
+        //       if (usuario) {
+        //        throw new Error ('El mail ingresado ya se encuentra registrado')
+        //     }
+    //    })
+//    })
+]
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');

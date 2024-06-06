@@ -1,5 +1,6 @@
-const datos = require("../db/index")
-let db = require("../database/models")
+const datos = require("../db/index");
+let db = require("../database/models");
+const bcrypt = require('bcryptjs');
 
 const userController = {
     profile: function (req, res) {
@@ -19,12 +20,23 @@ const userController = {
 
     registerStore: function(req, res) {
         let form = req.body;
-        db.Usuario.create(form)
-        .then(function(result){
-            console.log("estoy en el then")
-            return res.redirect("/")
-        })
-        .catch(error=> console.log(error))
+
+        let user = {
+            email:form.email,
+            usuario: form.usuario,
+            contrasenia: bcrypt.hashSync(form.contrasenia, 10),
+            fecha: form.birthday,
+            dni: form.dni, 
+            foto_perfil: form.profilePic
+        }
+
+        //quiero crear un usuario solo si no esta registrado. 
+        // if (user) not in db.Usuario.findAll('email')
+        db.Usuario.create(user)
+            .then(function(result){
+                return res.redirect("/")
+            })
+            .catch(error=> console.log(error))
     },
     
     login: function (req, res) {
