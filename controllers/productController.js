@@ -3,7 +3,10 @@ let dbProducto = db.Producto;
 
 const productController = {
     index: function (req, res) {
-        dbProducto.findAll()
+        dbProducto.findAll({include: [
+            {association: "comentarios"},
+            {association: "usuarios"}
+        ]})
             .then(function (productos) {
                 res.render("index", {productos: productos})
             })
@@ -13,7 +16,10 @@ const productController = {
 
     },
     product: function (req, res) {
-        dbProducto.findAll() //CAMBIOS
+        dbProducto.findAll({include: [
+            {association: "comentarios"},
+            {association: "usuarios"}
+        ]}) //CAMBIOS
             .then(function (data) {
                 return res.send(data)
             })
@@ -23,7 +29,10 @@ const productController = {
         //res.render("product", {productos: productos})
     },
     addProduct: function (req, res) {
-        dbProducto.findAll() //CAMBIOS
+        dbProducto.findAll({include: [
+            {association: "comentarios"},
+            {association: "usuarios"}
+        ]}) //CAMBIOS
         .then(function (data) {
             return res.send(data)
         })
@@ -36,4 +45,9 @@ const productController = {
     }
 }
 
+
+/* {include: [
+    {association: "comentarios"},
+    {association: "usuarios"}
+]}*/
 module.exports = productController;
