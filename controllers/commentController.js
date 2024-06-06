@@ -8,9 +8,16 @@ const commentController = {
 
     agregarComentario: function(req, res){
         return res.render()
-    } */
+    } 
 
-
+    db.Comentario.findAll({ 
+        include: [
+            {association: "producto"},
+            {association: "usuario"}
+        ]
+    })
+    .then()
+    */
 }  
 
 
