@@ -40,13 +40,13 @@ module.exports = function (sequelize, dataTypes) {
     let Comentario = sequelize.define(alias, cols, config);
 
     Comentario.associate = function(models) {
-        Comentario.hasMany(models.Producto, {
-            as: "producto",
+        Comentario.belongsTo(models.Producto, {
+            as: "productos",
             foreignKey: "producto_id"
         }),
 
-        Comentario.hasMany(models.Usuario, {
-            as: "usuario",
+        Comentario.belongsTo(models.Usuario, {
+            as: "usuarios",
             foreignKey: "comentador_id"
         })
     }

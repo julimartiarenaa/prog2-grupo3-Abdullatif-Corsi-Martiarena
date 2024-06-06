@@ -4,10 +4,10 @@ let dbProducto = db.Producto;
 const productController = {
 
     index: function (req, res) {
-        dbProducto.findAll({include: [
+        dbProducto.findAll(/*{include: [
             {association: "comentario"},
             {association: "usuario"}
-        ]})
+        ]}*/)
             .then(function (productos) {
                 res.render("index", {productos: productos})
             })
@@ -18,10 +18,10 @@ const productController = {
     },
 
     product: function (req, res) {
-        dbProducto.findAll({include: [
+        dbProducto.findAll(/*{include: [
             {association: "comentario"},
             {association: "usuario"}
-        ]}) //CAMBIOS
+        ]}*/) //CAMBIOS
             .then(function (data) {
                 return res.send(data)
             })
