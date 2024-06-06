@@ -30,6 +30,7 @@ module.exports = function (sequelize, dataTypes) {
             type: dataTypes.DATE
         }
     };
+
     let config = {
         tableName: 'comentarios',
         timestamps: true,
@@ -37,5 +38,18 @@ module.exports = function (sequelize, dataTypes) {
     };
 
     let Comentario = sequelize.define(alias, cols, config);
+
+    Comentario.associate = function(models) {
+        Comentario.hasMany(models.Producto, {
+            as: "producto",
+            foreignKey: "producto_id"
+        }),
+
+        Comentario.hasMany(models.Usuario, {
+            as: "usuario",
+            foreignKey: "comentador_id"
+        })
+    }
+
     return Comentario
 }
