@@ -46,17 +46,37 @@
 				<label for="usuario">Usuario:</label>
 				<input type="text" name="usuario" id="usuario" value="">
 
+				<% if (locals.errors && errors.usuario){ %>
+					<p> <%= errors.usuario.msg %></p>
+				  <% } %>
+
 				<label for="contrasenia">Contraseña:</label>
 				<input type="password" name="contrasenia" id="contrasenia" value="">
+				
+				<% if (locals.errors && errors.contrasenia){ %>
+					<p> <%= errors.contrasenia.msg %></p>
+				  <% } %>
 
 				<label for="birthday">Fecha de Nacimiento:</label>
-				<input type="text" name="birthday" id="birthday" value="">
+				<input type="text" name="birthday" id="birthday" value="" placeholder="AAAA/MM/DD">
+
+				<% if (locals.errors && errors.birthday){ %>
+					<p> <%= errors.birthday.msg %></p>
+				  <% } %>
 
 				<label for="dni">DNI:</label>
 				<input type="number" name="dni" id="DNI" value="">
 
+				<% if (locals.errors && errors.dni){ %>
+					<p> <%= errors.dni.msg %></p>
+				  <% } %>
+
 				<label for="profilePic">Foto de Perfil:</label>
 				<input type="text" name="profilePic" id="profilePic" value="">
+
+				<% if (locals.errors && errors.profilePic){ %>
+					<p> <%= errors.profilePic.msg %></p>
+				  <% } %>
 
 				<input class="done" type="submit" value="Registrate">
 

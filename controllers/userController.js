@@ -1,6 +1,7 @@
 const datos = require("../db/index");
 let db = require("../database/models");
 const bcrypt = require('bcryptjs');
+const { validationResult } = require('express-validator')
 
 const userController = {
     profile: function (req, res) {
@@ -13,12 +14,14 @@ const userController = {
         let usuario = datos.usuario
         res.render("profile-edit", {productos: productos, usuario: usuario})
     },
+
     registerCreate: function (req, res) {
 
         return res.render ('register')
     },
 
     registerStore: function(req, res) {
+        
         let form = req.body;
 
         let user = {
@@ -30,13 +33,16 @@ const userController = {
             foto_perfil: form.profilePic
         }
 
-        //quiero crear un usuario solo si no esta registrado. 
-        // if (user) not in db.Usuario.findAll('email')
-        db.Usuario.create(user)
+        let errors = validationResult(req);
+
+        if (errors.isEmpty()){
+            db.Usuario.create(user)
             .then(function(result){
                 return res.redirect("/")
             })
-            .catch(error=> console.log(error))
+        } else {
+            return res.render('register', {errors: errors.mapped(), old: req.body})
+        }
     },
     
     login: function (req, res) {
