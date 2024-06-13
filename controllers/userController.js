@@ -9,6 +9,7 @@ const userController = {
         let usuario = datos.usuario
         res.render("profile", {productos: productos, usuario: usuario})    
     }, 
+
     editProfile: function (req,res) {
         let productos = datos.productos
         let usuario = datos.usuario
@@ -31,7 +32,7 @@ const userController = {
             fecha: form.birthday,
             dni: form.dni, 
             foto_perfil: form.profilePic
-        }
+        };
 
         let errors = validationResult(req);
 
@@ -48,6 +49,7 @@ const userController = {
     login: function (req, res) {
         res.render("login")
     },
+    
     processLogin: function(req, res){
         let errors = validationResult(req)
         //return res.send(errors.mapped())
