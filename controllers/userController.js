@@ -45,42 +45,54 @@ const userController = {
             return res.render('register', {errors: errors.mapped(), old: req.body})
         }
     },
-    
     login: function (req, res) {
-        res.render("login")
+        //Si el usuario está logueado redirigirlo a home
+        if(req.session.user != undefined){
+            return res.redirect('/')
+        } else {
+            return res.render('login');
+        }
     },
     
     processLogin: function(req, res){
+        let form = req.body
         let errors = validationResult(req)
         //return res.send(errors.mapped())
- 
+        let filtro = {
+            where: [{email: form.email}]   
+        };
+
         if (errors.isEmpty()) {
-         db.User.findOne({
-             where: [{email:req.body.email}]
+         db.Usuario.findOne(filtro)
+         
+         .then((result)=>{
+            if (result != null) {
+                let check = bcrypt.compareSync(form.password, result.contrasenia);
+                if (check) {
+                    if (form.rememberme != undefined) {
+                        res.cookie("userId", result.id, {maxAge: 1000 * 60*15})
+                    }
+                }
+                return res.redirect("/");
+            } else {
+
+            }
+
          })
-         .then(function(usuarioEncontrado){
-             //Ponerlos en session.
-             req.session.user = {
-                 email: usuarioEncontrado.email,
-                 userName: usuarioEncontrado.name,
-             }
-             //Preguntar si el usuario tildó el checkbox para recordarlo
-             // return res.send (req.body);
-             if(req.body.recordarme != undefined){
-                 res.cookie('cookieEspecial', 'el dato que quiero guardar', {maxAge: 1000*60*123123123})
-             }
-             //Y si el usuario quiere, agregar la cookie para que lo recuerde.
-             
-             return res.redirect('/');
-         })
-           .catch(function(e){
-             console.log(e);
-         })
+           
+         .catch(function(e){
+            console.log(e);
+        })
          
         } else {
              return res.render("login", {errors: errors.mapped()})
         }
           
+     },
+     logout: function (req, res) {
+        req.session.destroy()
+        res.clearCookie("userId")
+        return res.redirect("/")
      }
 };
 
