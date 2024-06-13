@@ -33,14 +33,16 @@
 				<h2 class="products-title">Ingresar</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
-			<form class="login" action="/users/login/store" method="post">
+			<form class="login" action="/users/login" method="post">
 				<label for="usuario"> Usuario:</label>
-				<input type="email" id="usuario" name="usuario" value="" required>
+				<input type="email" id="email" name="email" required>
 		
 				<label for="contraseña"> Contraseña:</label>
-				<input type="password" id="contraseña" name="contraseña" value="" required>
+				<input type="password" id="password" name="password"  required>
 		
-				<span> Recordarme</span><input type="checkbox" id="recordarme" name="recordarme">
+				<label for="rememberme" > Recordarme</label>
+				<input type="checkbox" name="rememberme" id="rememberme">
+
 
 				<input class="done" type="submit" value="Ingresar">
 				
