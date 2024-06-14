@@ -33,7 +33,7 @@ const userController = {
             dni: form.dni, 
             foto_perfil: form.profilePic
         };
-
+        
         let errors = validationResult(req);
 
         if (errors.isEmpty()){
