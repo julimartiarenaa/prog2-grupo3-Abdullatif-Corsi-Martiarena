@@ -18,12 +18,14 @@ const productController = {
     },
 
     product: function (req, res) {
-        dbProducto.findAll({include: [
+        let idProducto = req.params.id
+        dbProducto.findByPk(idProducto, {include: [
             {association: "comentarios"},
             {association: "usuarios"}
+
         ]}) //CAMBIOS
-            .then(function (data) {
-                return res.send(data)
+            .then(function (result) {
+                return res.render("product", {producto: result})
             })
             .catch(function (error) {
                 return console.log(error);
