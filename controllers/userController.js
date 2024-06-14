@@ -63,29 +63,18 @@ const userController = {
         };
 
         if (errors.isEmpty()) {
-         db.Usuario.findOne(filtro)
+            db.Usuario.findOne(filtro)
          
-         .then((result)=>{
-            if (result != null) {
-                let check = bcrypt.compareSync(form.password, result.contrasenia);
-                if (check) {
-                    if (form.rememberme != undefined) {
-                        res.cookie("userId", result.id, {maxAge: 1000 * 60*15})
+            .then((result)=>{
+                if (result != null) {
+                    res.cookie("userId", result.id, {maxAge: 1000 * 60*15})      
                     }
-                }
-                return res.redirect("/");
-            } else {
-
-            }
-
-         })
+            })
            
-         .catch(function(e){
-            console.log(e);
-        })
-         
+             return res.redirect("/");
+
         } else {
-             return res.render("login", {errors: errors.mapped()})
+            return res.render('login', {errors: errors.mapped(), old: req.body})
         }
           
      },
