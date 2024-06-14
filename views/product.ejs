@@ -49,13 +49,13 @@
 				<div class="col-12 col-lg-4">
 					<section class="comments">
 
-						<% for(let i = 0; i < productos[0].comentarios.length; i++) { %>    
+						<% for(let i = 0; i < producto.comentarios.length; i++) { %>    
                             <article>
-                                <img src=<%= productos[0].comentarios[i].imagenPerfil %> alt=<%= productos[0].nombreProducto %> >
+                                <img src=<%= producto.comentarios[i].url_foto_perfil %> alt=<%= producto.nombreProducto %> >
                                 <div class="data">
                                     <p class="user">
-                                        <strong> <a href="profile"> <%= productos[0].comentarios[i].comentador %> </a> </strong>
-                                        <%= productos[0].comentarios[i].comentario %> 
+                                        <strong> <a href="profile"> <%= producto.usuarios[i].usuario %> </a> </strong>
+                                        <%= producto.comentarios[i].comentario %> 
 									</p>
                                 </div>
                             </article>

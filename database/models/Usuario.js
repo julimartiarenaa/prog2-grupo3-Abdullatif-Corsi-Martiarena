@@ -69,6 +69,7 @@ module.exports = function(sequelize, dataTypes) {
             as: 'comentario',
             foreignKey: 'id'
         })
+        
     }
 
     return Usuario

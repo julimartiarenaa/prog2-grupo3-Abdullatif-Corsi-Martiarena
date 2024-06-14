@@ -32,9 +32,6 @@ let loginValidations = [
         .then((result) => {
             console.log(result);
                 let check = bcrypt.compareSync(value, result.contrasenia);
-                console.log(req.body.password);
-                console.log(value);
-                console.log(result.contrasenia);
                 console.log(check);
                 if (check == false) {
                     throw new Error("La contraseña es inválida")
