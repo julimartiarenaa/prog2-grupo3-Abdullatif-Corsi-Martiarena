@@ -67,10 +67,10 @@ const userController = {
          
             .then((result)=>{
                 req.session.user = result;
-                    if (form.rememberme != undefined) {
-                        res.cookie("userId", result.id, {maxAge: 1000 * 60 * 35})
-                    }
-                    return res.redirect("/");
+                if (form.rememberme != undefined) {
+                    res.cookie("userId", result.id, {maxAge: 1000 * 60 * 35})
+                }
+                return res.redirect("/");
             })
         } else {
             return res.render('login', {errors: errors.mapped(), old: req.body})
