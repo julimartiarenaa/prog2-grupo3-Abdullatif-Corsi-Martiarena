@@ -30,12 +30,17 @@ let loginValidations = [
             where: { email: req.body.email}
         })
         .then((result) => {
-            console.log(result);
+            if (!result) {
+                throw new Error("El email no se encuentra registrado")
+            }
+            else{
                 let check = bcrypt.compareSync(value, result.contrasenia);
                 console.log(check);
                 if (check == false) {
                     throw new Error("La contraseña es inválida")
-                }
+                    }
+            }
+           
         })
         
     })
