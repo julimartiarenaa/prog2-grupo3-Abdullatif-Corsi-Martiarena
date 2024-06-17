@@ -53,7 +53,12 @@
 							<li> <%= productos.length%> Productos</li>
 						<%}%>
 						<li>200 seguidores</li>
-						<li>300 comentarios</li>
+						<!-- este condicional es para que diga 1 comentario y no 1 comentarios.-->
+						<% if (comentarios.length == 1) {%>
+							<li> <%= comentarios.length%> Comentario</li>
+						<%} else {%>
+							<li> <%= comentarios.length%> Comentarios</li>
+						<%}%>
 					</ul>
 				</div>
 			</div>

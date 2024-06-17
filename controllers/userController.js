@@ -17,16 +17,23 @@ const userController = {
                     vendedor_id: idUsuario
                 }
             }).then(function (productos) {
+                    // una vez que tengo los productos, busco los comentarios.
+                    return db.Comentario.findAll({
+                        where: {
+                            comentador_id: idUsuario
+                        }
+                    }).then(function (comentarios) {
                     //defino los datos del usuario que necesito mostrar en la pagina
-                    let datosUsuario = {
-                        idUsuario: idUsuario,
-                        usuario: req.session.user.usuario,
-                        email: req.session.user.email,
-                        fotoPerfil: req.session.user.foto_perfil,
-                    };
 
-                    return res.render('profile', { productos: productos, datosUsuario: datosUsuario });
-                })
+                        let datosUsuario = {
+                            idUsuario: idUsuario,
+                            usuario: req.session.user.usuario,
+                            email: req.session.user.email,
+                            fotoPerfil: req.session.user.foto_perfil
+                    };
+                    // una vez que tengo todo, renderizo a profile
+                    res.render('profile', {productos: productos, comentarios:comentarios, datosUsuario: datosUsuario})
+                })})
                 .catch(function (error) {
                     console.log(error);
                 })
