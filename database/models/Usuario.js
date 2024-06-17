@@ -60,12 +60,12 @@ module.exports = function(sequelize, dataTypes) {
     let Usuario = sequelize.define(alias, cols, config);
 
     Usuario.associate = function (models) {
-        Usuario.belongsTo(models.Producto, {
-            as: 'producto',
-            foreignKey: 'id'
+        Usuario.hasMany(models.Producto, {
+            as: 'productos',
+            foreignKey: 'vendedor_id'
         }),
 
-        Usuario.belongsTo(models.Comentario, {
+        Usuario.hasMany(models.Comentario, {
             as: 'comentario',
             foreignKey: 'id'
         })

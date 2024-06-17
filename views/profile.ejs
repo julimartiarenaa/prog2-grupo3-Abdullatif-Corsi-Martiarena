@@ -32,21 +32,26 @@
 	<section class="info-usuario container products-wrapper">
 		<div class="row">
 			<div class="img-container offset-3 col-2">
-				<img src="<%= usuario.fotoPerfil%>" alt="foto de perfil" class="foto-perfil">
+				<img src="<%= datosUsuario.fotoPerfil%>" alt="foto de perfil" class="foto-perfil">
 			</div>
 			<div class="data-container col-6">
 				<div class="d-flex align-items-center ">
-					<h1 class="main-title"> <%= usuario.nUsuario%> 
+					<h1 class="main-title"> <%= datosUsuario.usuario%> 
 						<a href="/profile/profile-edit">
 							<i class="fas fa-cog"></i>
 						</a>
 					</h1>
 					<a class="btn mt-3 ml-4" href="">SEGUIR</a>
 				</div>
-				<p class="tipografia-descripcion"><%= usuario.email%></p>
+				<p class="tipografia-descripcion"><%= datosUsuario.email%></p>
 				<div>
 					<ul class="tipografia-descripcion">
-						<li>8 productos</li>
+						<!-- este condicional es para que diga 1 producto y no 1 productos.-->
+						<% if (productos.length == 1) {%>
+							<li> <%= productos.length%> Producto</li>
+						<%} else {%>
+							<li> <%= productos.length%> Productos</li>
+						<%}%>
 						<li>200 seguidores</li>
 						<li>300 comentarios</li>
 					</ul>
@@ -62,26 +67,27 @@
 			<div class="col-12">
 				<h2 class="products-title">Mis productos</h2>
 			</div>
-
-			<% for(let i = 0; i < 4; i++) { %>
-
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/products">
-							<figure class="product-box_image">
-								<img src=<%= productos[i].imagenProducto %> alt=<%= productos[i].nombreProducto %> > 
-							</figure>
-							<article class="product-box_data">
-								<h2 ><%= productos[i].nombreProducto %></h2></h2>
-								<p ></p><%= productos[i].descripcion %></p>
-								<p ></p>Comentarios: <%= productos[i].comentarios.length %></p>
-							</article>
-						</a>
-					</section>
-				</div>
-
+		
+			<% if (productos && productos.length > 0) { %>
+				<% for(let i = 0; i < productos.length && i < 4; i++) { %>
+					<div class="col-12 col-sm-6 col-lg-3">
+						<section class="product-box">
+							<a href="/products">
+								<figure class="product-box_image">
+									<img src="<%= productos[i].url_imagen %>" alt="<%= productos[i].nombre %>">
+								</figure>
+								<article class="product-box_data">
+									<h2><%= productos[i].nombre %></h2>
+									<p><%= productos[i].descripcion %></p>
+								</article>
+							</a>
+						</section>
+					</div>
+				<% } %>
+			<% } else { %>
+				<p>No hay productos para mostrar</p>
 			<% } %>
-
+			
 		</div>
 	</div>
 	<!-- /Mis productos -->
