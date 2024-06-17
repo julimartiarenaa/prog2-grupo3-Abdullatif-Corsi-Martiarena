@@ -47,7 +47,12 @@
 				<input class="done" type="submit" value="Ingresar">
 				
 			</form>
-		
+			<% if(locals.errors && errors.email){ %>
+				<p> <%= errors.email.msg %></p>
+			  <% } %>
+			  <% if(locals.errors && errors.password){ %>
+				<p> <%= errors.password.msg %></p>
+			  <% } %>
 
 
 	<!-- footer -->

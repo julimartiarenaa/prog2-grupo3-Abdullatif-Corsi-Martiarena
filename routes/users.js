@@ -7,44 +7,40 @@ const { compareSync } = require('bcryptjs');
 const bcrypt = require("bcryptjs")
 
 let loginValidations = [
-  body("email")
-      .notEmpty().withMessage("Por favor complete el campo email")
-      .isEmail().withMessage("Por favor ingrese un email válido")
-      .custom(function (value) { 
-
-          return db.Usuario.findOne({
-              where: { email: req.body.email }
-          })
-          .then( function (usuario) {
-              if (!usuario) {
-                  throw new Error("El email no se encuentra registrado")
-              } 
-          })
-          
-      }).bail(),
-  body("password")
-      .notEmpty().withMessage("Por favor complete el campo contraseña")
-      .custom(function (value, {req}) { 
-
-        db.Usuario.findOne({
-            where: { email: req.body.email}
-        })
-        .then((result) => {
-            if (!result) {
-                throw new Error("El email no se encuentra registrado")
-            }
-            else{
-                let check = bcrypt.compareSync(value, result.contrasenia);
-                console.log(check);
-                if (check == false) {
-                    throw new Error("La contraseña es inválida")
+    body("email")
+        .notEmpty().withMessage("Por favor complete el campo email")
+        .isEmail().withMessage("Por favor ingrese un email válido")
+        .custom(function (value) {
+            return db.Usuario.findOne({
+                where: { email: value }
+            })
+                .then(function (usuario) {
+                    if (!usuario) {
+                        throw new Error("El email no se encuentra registrado")
                     }
-            }
-           
+                })
+
+        }).bail(),
+    body("password")
+        .notEmpty().withMessage("Por favor complete el campo contraseña")
+        .custom(function (value, { req }) {
+
+            return db.Usuario.findOne({
+                where: { email: req.body.email }
+            })
+                .then((result) => {
+                    if (result) {
+                        let check = bcrypt.compareSync(value, result.contrasenia);
+                        console.log(check);
+                        if (check == false) {
+                            throw new Error("La contraseña es inválida")
+                        }
+                    }
+
+                })
+
         })
-        
-    })
-      
+
 ]
 
 const registerValidations = [
@@ -53,13 +49,13 @@ const registerValidations = [
         .isEmail().withMessage('Por favor ingrese un email válido.')
         .custom(function (value) {
             return db.Usuario.findOne({
-                where: {email: value}
+                where: { email: value }
             })
-            .then(function (usuario) {
-               if (usuario) {
-                throw new Error ('El mail ingresado ya se encuentra registrado')
-                }
-            })
+                .then(function (usuario) {
+                    if (usuario) {
+                        throw new Error('El mail ingresado ya se encuentra registrado')
+                    }
+                })
         }),
     body('usuario')
         .notEmpty().withMessage('Por favor, complete el campo usuario.'),
@@ -77,15 +73,15 @@ const registerValidations = [
 ]
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/', function (req, res, next) {
+    res.send('respond with a resource');
 });
 
 router.get('/profile', userController.profile);
 router.get('/profile-edit', userController.editProfile);
 
 router.get('/register', userController.registerCreate);
-router.post('/register/store', registerValidations , userController.registerStore);
+router.post('/register/store', registerValidations, userController.registerStore);
 
 router.get('/login', userController.login);
 router.post('/login', loginValidations, userController.processLogin);
