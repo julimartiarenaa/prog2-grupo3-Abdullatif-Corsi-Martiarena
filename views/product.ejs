@@ -23,19 +23,40 @@
 	<!-- Header -->
 	<% if (locals.user != undefined ){ %>
 		<%- include('./partials/headerLogueado') %>
+		<% if (locals.user.id == producto.vendedor_id) { %>
+			<div class="container products-wrapper">
+				<div class="d-flex align-items-center">
+					<h2 class="products-title"><%= producto.nombre %></h2> 
+					<p class="product-detail-description">
+						<a href="/products/product-add">Editar</a> 
+						<br>
+						<a href="/products/delete/<%= producto.id %>">Eliminar</a> 
+					</p>
+				</div>
+			</div>
+			<%}else{%>
+				<div class="container products-wrapper">
+					<div class="d-flex align-items-center">
+						<h2 class="products-title"><%= producto.nombre %></h2> 
+					</div>
+				</div>
+
+			<%}%>
+
+		
 	<%} else{  %>
 		<%- include('./partials/header') %>
+		<div class="container products-wrapper">
+			<div class="d-flex align-items-center">
+				<h2 class="products-title"><%= producto.nombre %></h2> 
+			</div>	
+		</div>
 	<% } %>
 	<!-- /Header -->
+
 	
 	<!-- product detail -->
 	<div class="container products-wrapper">
-		<div class="d-flex align-items-center">
-			<h2 class="products-title"><%= producto.nombre %></h2> 
-			<p class="product-detail-description">
-				<a href="/products/product-add">Editar</a> 
-			</p>
-		</div>
 		<div class="product-detail">
 			<div class="row">
 				
@@ -70,14 +91,18 @@
                         <% } %>	
 
 					</section>
-					
-					<form class="form" action="" method="GET"> 
+					<% if (locals.user != undefined) { %>
+						<form class="form" action="/comments/addComment/<%= producto.id %>" method="post"> 
 						
-						<input class="form-input" type="text" name="comentario" value="" placeholder="Agregar comentario">
-
-						<button class="buy-now-button" type="submit">Enviar comentario</button>
-
-					</form>
+							<input class="form-input" type="text" name="comentario"  placeholder="Agregar comentario">
+	
+							<button class="buy-now-button" type="submit">Enviar comentario</button>
+	
+						</form>
+					<%} else {%>
+						<p><a href="/users/login" class="buy-now-button">¡Ingresá para comentar!</a></p>
+					<%} %>
+					
 					<hr>
 				</div>
 			</div>

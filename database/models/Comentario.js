@@ -13,7 +13,7 @@ module.exports = function (sequelize, dataTypes) {
             type: dataTypes.INTEGER
         },
         comentario: {
-            type: dataTypes.STRING(500)
+            type: dataTypes.STRING
         },
         url_foto_perfil: {
             type: dataTypes.STRING(100)

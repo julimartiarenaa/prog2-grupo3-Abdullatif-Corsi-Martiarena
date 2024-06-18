@@ -25,19 +25,31 @@ const productController = {
 
         ]})
         .then(function (producto) {
-                    // una vez que tengo los productos, busco los comentarios.
+
                     return db.Usuario.findAll()
                     .then(function (usuario) {
-                    // una vez que tengo todo, renderizo a profile
+                    
 
                     res.render('product', {producto: producto, usuario: usuario})
                 })})
                 .catch(function (error) {
                     console.log(error);
                 })
-         //CAMBIOS
-           
-        //res.render("product", {productos: productos})
+
+    },
+    deleteProduct: function (req, res) {
+        let idProducto = req.params.id
+        db.Producto.destroy({
+            where:{
+                id: idProducto
+            }
+        })
+        .then(function (producto) {
+            return res.redirect("/")
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
     },
 
     addProduct: function (req, res) {

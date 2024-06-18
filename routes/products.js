@@ -4,6 +4,7 @@ const productController = require('../controllers/productController');
 const { body } = require("express-validator");
 
 router.get('/:id', productController.product);
+router.get('/delete/:id', productController.deleteProduct);
 router.get('/product-add', productController.addProduct); //es lo mismo product-add que product.create?
 router.post("/store", productController.store); //--> es lo que va en el action
 

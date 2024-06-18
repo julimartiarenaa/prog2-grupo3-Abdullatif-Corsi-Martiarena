@@ -102,6 +102,7 @@ const userController = {
 
                 .then((result) => {
                     req.session.user = result;
+                    console.log(result);
                     if (form.rememberme != undefined) {
                         res.cookie("userId", result.id, { maxAge: 1000 * 60 * 35 })
                     }
