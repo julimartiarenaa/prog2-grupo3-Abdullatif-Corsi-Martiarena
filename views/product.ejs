@@ -54,7 +54,15 @@
                                 <img src=<%= producto.comentarios[i].url_foto_perfil %> alt=<%= producto.nombreProducto %> >
                                 <div class="data">
                                     <p class="user">
-                                        <strong> <a href="profile"> <%= producto.usuarios[i].usuario %> </a> </strong>
+										
+										<% let usuarioNombre = null%>
+										<% for (let ii = 0; ii < usuario.length; ii++) { %>
+											<%if (usuario[ii].id == producto.comentarios[i].comentador_id) { %>
+												<% usuarioNombre = usuario[ii].usuario %>
+												<%break %>
+												<% } %>
+											<%} %>
+                                        <strong> <a href="profile"> <%= usuarioNombre  %> </a> </strong>
                                         <%= producto.comentarios[i].comentario %> 
 									</p>
                                 </div>

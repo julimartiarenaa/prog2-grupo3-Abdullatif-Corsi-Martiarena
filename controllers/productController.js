@@ -23,13 +23,20 @@ const productController = {
             {association: "comentarios"},
             {association: "usuarios"}
 
-        ]}) //CAMBIOS
-            .then(function (result) {
-                return res.render("product", {producto: result})
-            })
-            .catch(function (error) {
-                return console.log(error);
-            })
+        ]})
+        .then(function (producto) {
+                    // una vez que tengo los productos, busco los comentarios.
+                    return db.Usuario.findAll()
+                    .then(function (usuario) {
+                    // una vez que tengo todo, renderizo a profile
+
+                    res.render('product', {producto: producto, usuario: usuario})
+                })})
+                .catch(function (error) {
+                    console.log(error);
+                })
+         //CAMBIOS
+           
         //res.render("product", {productos: productos})
     },
 
