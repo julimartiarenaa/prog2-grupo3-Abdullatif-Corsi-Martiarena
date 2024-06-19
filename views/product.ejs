@@ -64,6 +64,8 @@
                     <img src=<%= producto.url_imagen %> alt=<%= producto.nombre %>  class="product-detail-img">
                     <p class="product-detail-description">
                         <%= producto.descripcion %> 
+						<br>
+						Cragado por: <a href=""><%= producto.usuarios.usuario  %></a> 
 					</p>     
                 </article>
 

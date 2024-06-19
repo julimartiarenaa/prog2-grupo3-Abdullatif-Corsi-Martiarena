@@ -20,12 +20,15 @@ const productController = {
     product: function (req, res) {
         let idProducto = req.params.id
         dbProducto.findByPk(idProducto, {include: [
-            {association: "comentarios"},
+            {association: "comentarios",
+                separate: true,
+                order: [["createdAt", "DESC"]]
+            },
             {association: "usuarios"}
 
         ]})
         .then(function (producto) {
-
+            console.log(producto.comentarios);
                     return db.Usuario.findAll()
                     .then(function (usuario) {
                     

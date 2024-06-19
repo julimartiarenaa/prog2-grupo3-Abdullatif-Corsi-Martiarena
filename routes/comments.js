@@ -6,7 +6,7 @@ const { body } = require("express-validator");
 let commetnsValidations = [
     body("comentario")
         .notEmpty().withMessage('Por favor, complete el campo comentario.').bail()
-        .isStrongPassword({minLength: 3}).withMessage('Su comentario debe superar los 3 caracteres').bail()
+        .isLength({min:3}).withMessage('Su comentario debe superar los 3 caracteres').bail()
 ]
 
 router.get("/addComment", commentController.addComment);

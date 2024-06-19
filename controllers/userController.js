@@ -96,20 +96,22 @@ const userController = {
         let filtro = {
             where: [{ email: form.email }]
         };
-
-        if (errors.isEmpty()) {
-            db.Usuario.findOne(filtro)
-
-                .then((result) => {
-                    req.session.user = result;
-                    console.log(result);
-                    if (form.rememberme != undefined) {
-                        res.cookie("userId", result.id, { maxAge: 1000 * 60 * 35 })
-                    }
-                    return res.redirect("/");
-                })
+        if(req.session.user == undefined ){
+            if (errors.isEmpty()) {
+                db.Usuario.findOne(filtro)
+    
+                    .then((usuario) => {
+                        req.session.user = usuario;
+                        if (form.rememberme != undefined) {
+                            res.cookie("userId", usuario.id, { maxAge: 1000 * 60 * 35 })
+                        }
+                        return res.redirect("/");
+                    })
+            } else {
+                return res.render('login', { errors: errors.mapped(), old: req.body })
+            }
         } else {
-            return res.render('login', { errors: errors.mapped(), old: req.body })
+            return res.redirect('/')
         }
 
     },

@@ -10,38 +10,39 @@ const commentController = {
     storeComment: function (req, res) {
         let idProducto = req.params.id
         let errors = validationResult(req)
-        if (errors.isEmpty()) {
-            db.Comentario.create({
-                producto_id: idProducto,
-                comentador_id: req.session.user.id,
-                comentario: req.body.comentario,
-                url_foto_perfil: req.session.user.foto_perfil
-            })
-                .then(function (comment) {
-                    return res.redirect("/")
-                })
-                .catch(function (errors) {
-                    console.log(errors);
-                })
-
+        if (req.session.user == undefined) {
+            return res.redirect('/login')
         } else {
-            db.Producto.findByPk(idProducto, {
-                include: [
-                    { association: "comentarios" },
-                    { association: "usuarios" }
-
-                ]
-            })
-                .then(function (producto) {
-                    return db.Usuario.findAll()
-                        .then(function (usuario) {
-                            res.render('product', {errors:errors.mapped(), producto: producto, usuario: usuario })
-                        })
+            if (errors.isEmpty()) {
+                db.Comentario.create({
+                    producto_id: idProducto,
+                    comentador_id: req.session.user.id,
+                    comentario: req.body.comentario,
+                    url_foto_perfil: req.session.user.foto_perfil
                 })
-                .catch(function (error) {
-                    console.log(error);
-                })
+                    .then(function (comment) {
+                        return res.redirect("/")
+                    })
+            } else {
+                db.Producto.findByPk(idProducto, {
+                    include: [
+                        {
+                            association: "comentarios",
+                            separate: true,
+                            order: [["createdAt", "ASC"]]
+                        },
+                        { association: "usuarios" }
 
+                    ]
+                })
+                    .then(function (producto) {
+                        console.log(producto.comentarios);
+                        return db.Usuario.findAll()
+                            .then(function (usuario) {
+                                res.render('product', { errors: errors.mapped(), producto: producto, usuario: usuario })
+                            })
+                    })
+            }
         }
     }
 
