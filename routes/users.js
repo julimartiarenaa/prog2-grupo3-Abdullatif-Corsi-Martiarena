@@ -61,7 +61,7 @@ const registerValidations = [
         .notEmpty().withMessage('Por favor, complete el campo usuario.'),
     body('contrasenia')
         .notEmpty().withMessage('Por favor, complete el campo contraseña.')
-        .isStrongPassword({minLength: 6, minUppercase:1, minLowercase:4, minNumbers: 0, minSymbols:0}).withMessage('La contraseña debe tener 6 caracteres y al menos dos mayusculas.'),
+        .isStrongPassword({minLength: 6, minUppercase:1, minLowercase:4, minNumbers: 0, minSymbols:0}).withMessage('La contraseña debe tener 6 caracteres y al menos una mayuscula.'),
     body('birthday')
         .notEmpty().withMessage('Por favor, complete el campo fecha de nacimiento.')
         .isDate().withMessage('Por favor, ingrese la fecha en formato AAA/MM/DD'),
@@ -77,7 +77,8 @@ router.get('/', function (req, res, next) {
     res.send('respond with a resource');
 });
 
-router.get('/profile', userController.profile);
+router.get('/profile', userController.profilePersonal);
+router.get('/profile/:id', userController.profile);
 router.get('/profile-edit', userController.editProfile);
 
 router.get('/register', userController.registerCreate);

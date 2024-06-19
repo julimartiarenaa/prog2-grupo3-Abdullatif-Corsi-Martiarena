@@ -5,7 +5,8 @@ const { validationResult } = require('express-validator');
 const { where } = require("sequelize");
 
 const userController = {
-    profile: function (req, res) {
+    
+    profilePersonal: function (req, res) {
         //Si el usuario está logueado le mostrare su perfil
         if (req.session.user != undefined) {
 
@@ -44,6 +45,42 @@ const userController = {
         }
 
     },
+
+    profile: function (req, res) {
+
+        let idUsuario = req.params.id;
+
+        db.Producto.findAll({ 
+            //busco los productos que coincidan con el id del usuario
+            where: {
+                vendedor_id: idUsuario
+            }
+        }).then(function (productos) {
+                // una vez que tengo los productos, busco los comentarios.
+                return db.Comentario.findAll({
+                    where: {
+                        comentador_id: idUsuario
+                    }
+                }).then(function (comentarios) {
+                //una vez que tengo los comentarios, busco los datos del usuario a buscar.
+                    return db.Usuario.findByPk(idUsuario)
+                    .then(function (usuario) {
+                        console.log(usuario);
+                        let datosUsuario = {
+                            idUsuario: idUsuario,
+                            usuario: usuario.usuario,
+                            email: usuario.email,
+                            fotoPerfil: usuario.foto_perfil
+                        }
+                // una vez que tengo todo, renderizo a profile
+                res.render('profile', {productos: productos, comentarios:comentarios, datosUsuario: datosUsuario})
+                })
+            })})
+            .catch(function (error) {
+                console.log(error);
+            })
+  
+        },
 
     editProfile: function (req, res) {
         let productos = datos.productos
