@@ -99,6 +99,10 @@
 							<button class="buy-now-button" type="submit">Enviar comentario</button>
 	
 						</form>
+						<% if(locals.errors && errors.comentario){ %>
+							<p> <%= errors.comentario.msg %></p>
+						  <% } %>
+
 					<%} else {%>
 						<p><a href="/users/login" class="buy-now-button">¡Ingresá para comentar!</a></p>
 					<%} %>
