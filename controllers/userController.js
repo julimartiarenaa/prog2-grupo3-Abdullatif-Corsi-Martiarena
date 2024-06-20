@@ -18,6 +18,7 @@ const userController = {
                     vendedor_id: idUsuario
                 }
             }).then(function (productos) {
+                console.log(productos[0].id);
                     // una vez que tengo los productos, busco los comentarios.
                     return db.Comentario.findAll({
                         where: {
