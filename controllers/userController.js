@@ -5,37 +5,38 @@ const { validationResult } = require('express-validator');
 const { where } = require("sequelize");
 
 const userController = {
-    
+
     profilePersonal: function (req, res) {
         //Si el usuario está logueado le mostrare su perfil
         if (req.session.user != undefined) {
 
             let idUsuario = req.session.user.id;
 
-            db.Producto.findAll({ 
+            db.Producto.findAll({
                 //busco los productos que coincidan con el id del usuario
                 where: {
                     vendedor_id: idUsuario
                 }
             }).then(function (productos) {
                 console.log(productos[0].id);
-                    // una vez que tengo los productos, busco los comentarios.
-                    return db.Comentario.findAll({
-                        where: {
-                            comentador_id: idUsuario
-                        }
-                    }).then(function (comentarios) {
+                // una vez que tengo los productos, busco los comentarios.
+                return db.Comentario.findAll({
+                    where: {
+                        comentador_id: idUsuario
+                    }
+                }).then(function (comentarios) {
                     //defino los datos del usuario que necesito mostrar en la pagina
 
-                        let datosUsuario = {
-                            idUsuario: idUsuario,
-                            usuario: req.session.user.usuario,
-                            email: req.session.user.email,
-                            fotoPerfil: req.session.user.foto_perfil
+                    let datosUsuario = {
+                        idUsuario: idUsuario,
+                        usuario: req.session.user.usuario,
+                        email: req.session.user.email,
+                        fotoPerfil: req.session.user.foto_perfil
                     };
                     // una vez que tengo todo, renderizo a profile
-                    res.render('profile', {productos: productos, comentarios:comentarios, datosUsuario: datosUsuario})
-                })})
+                    res.render('profile', { productos: productos, comentarios: comentarios, datosUsuario: datosUsuario })
+                })
+            })
                 .catch(function (error) {
                     console.log(error);
                 })
@@ -48,40 +49,50 @@ const userController = {
     },
 
     profile: function (req, res) {
-
         let idUsuario = req.params.id;
 
-        db.Producto.findAll({ 
-            //busco los productos que coincidan con el id del usuario
-            where: {
-                vendedor_id: idUsuario
-            }
-        }).then(function (productos) {
-                // una vez que tengo los productos, busco los comentarios.
-                return db.Comentario.findAll({
-                    where: {
-                        comentador_id: idUsuario
-                    }
-                }).then(function (comentarios) {
-                //una vez que tengo los comentarios, busco los datos del usuario a buscar.
-                    return db.Usuario.findByPk(idUsuario)
-                    .then(function (usuario) {
-                        console.log(usuario);
-                        let datosUsuario = {
-                            idUsuario: idUsuario,
-                            usuario: usuario.usuario,
-                            email: usuario.email,
-                            fotoPerfil: usuario.foto_perfil
+        // Primero, chequeo que exista ese usuario en la base de datos.
+        db.Usuario.findByPk(idUsuario)
+            .then(function (usuario) {
+                // Si existe, busco los datos del usuario.
+                if (usuario != null) {
+                    let datosUsuario = {
+                        idUsuario: idUsuario,
+                        usuario: usuario.usuario,
+                        email: usuario.email,
+                        fotoPerfil: usuario.foto_perfil
+                    };
+
+                    // Busco los productos que coincidan con el id del usuario
+                    return db.Producto.findAll({
+                        where: {
+                            vendedor_id: idUsuario
                         }
-                // una vez que tengo todo, renderizo a profile
-                res.render('profile', {productos: productos, comentarios:comentarios, datosUsuario: datosUsuario})
-                })
-            })})
+                    })
+                        .then(function (productos) {
+                            // Una vez que tengo los productos, busco los comentarios.
+                            return db.Comentario.findAll({
+                                where: {
+                                    comentador_id: idUsuario
+                                }
+                            })
+                                .then(function (comentarios) {
+                                    // Ahora que tengo todos los datos, renderizo al perfil.
+                                    res.render('profile', {
+                                        productos: productos, comentarios: comentarios, datosUsuario: datosUsuario
+                                    });
+                                });
+                        });
+                } else {
+                    // Si no existe, lo redirijo a la pagina principal
+                    res.redirect('/');
+                }
+            })
             .catch(function (error) {
                 console.log(error);
-            })
-  
-        },
+            });
+    },
+
 
     editProfile: function (req, res) {
         let productos = datos.productos
@@ -104,8 +115,9 @@ const userController = {
             contrasenia: bcrypt.hashSync(form.contrasenia, 10),
             fecha: form.birthday,
             dni: form.dni,
-            foto_perfil: form.profilePic
+            foto_perfil: '/images/users/' + form.profilePic
         };
+        console.log(user);
 
         let errors = validationResult(req);
 
@@ -134,10 +146,10 @@ const userController = {
         let filtro = {
             where: [{ email: form.email }]
         };
-        if(req.session.user == undefined ){
+        if (req.session.user == undefined) {
             if (errors.isEmpty()) {
                 db.Usuario.findOne(filtro)
-    
+
                     .then((usuario) => {
                         req.session.user = usuario;
                         if (form.rememberme != undefined) {
