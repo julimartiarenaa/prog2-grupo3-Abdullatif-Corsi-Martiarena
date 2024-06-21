@@ -81,6 +81,14 @@ const registerValidations = [
         }),
     body('profilePic')
         .notEmpty().withMessage('Por favor, ingrese una foto')
+        .custom(function (value) {
+            let imagenes = ['comentador.jpeg', 'comentadora.jpg', 'profile.jpg'];
+            // en python if value not in imagenes 
+            if (!imagenes.includes(value)) {
+                throw new Error('Por favor ingrese una de las siguientes imagenes: comentador.jpeg, comentadora.jpg, profile.jpg')
+            }
+            return true;
+        })
 ]
 
 /* GET users listing. */
