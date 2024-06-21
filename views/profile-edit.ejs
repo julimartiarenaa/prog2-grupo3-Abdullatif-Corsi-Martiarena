@@ -41,14 +41,14 @@
 			<form class="login" action="/users/profile-edit/store" method="post">  
 
 				<label for="email">Email:</label>
-				<input type="email" name="email" id="email" placeholder="<%= datosUsuario.email%>" value="<%= locals.old !== undefined && old.email ? old.email : "" %>">
+				<input type="email" name="email" id="email" value="<%= datosUsuario.email%>">
 
 				<% if (locals.errors && errors.email){ %>
 					<p> <%= errors.email.msg %></p>
 				  <% } %>
 
 				<label for="usuario">Usuario:</label>
-				<input type="text" name="usuario" id="usuario" placeholder="<%= datosUsuario.usuario%>" value="<%= locals.old !== undefined && old.usuario ? old.usuario : "" %>">
+				<input type="text" name="usuario" id="usuario" value="<%= datosUsuario.usuario%>">
 
 				<% if (locals.errors && errors.usuario){ %>
 					<p> <%= errors.usuario.msg %></p>
@@ -62,21 +62,21 @@
 				  <% } %>
 
 				<label for="birthday">Fecha de Nacimiento:</label>
-				<input type="text" name="birthday" id="birthday" placeholder="<%= datosUsuario.fecha%>" value="<%= locals.old !== undefined && old.birthday ? old.birthday : "" %>">
+				<input type="text" name="birthday" id="birthday" value="<%= datosUsuario.fecha%>">
 
 				<% if (locals.errors && errors.birthday){ %>
 					<p> <%= errors.birthday.msg %></p>
 				  <% } %>
 
 				<label for="dni">DNI:</label>
-				<input type="number" name="dni" id="dni" placeholder="<%= datosUsuario.dni%>" value="<%= locals.old !== undefined && old.dni ? old.dni : "" %>">
+				<input type="number" name="dni" id="dni" value="<%= datosUsuario.dni%>">
 
 				<% if (locals.errors && errors.dni){ %>
 					<p> <%= errors.dni.msg %></p>
 				  <% } %>
 
 				<label for="profilePic">Foto de Perfil:</label>
-				<input type="text" name="profilePic" id="profilePic" placeholder="<%= datosUsuario.foto_perfil%>" value="<%= locals.old !== undefined && old.profilePic ? old.profilePic : "" %>">
+				<input type="text" name="profilePic" id="profilePic" value="<%= datosUsuario.foto_perfil.slice(14)%>">
 
 				<% if (locals.errors && errors.profilePic){ %>
 					<p> <%= errors.profilePid.msg %></p>

@@ -12,34 +12,31 @@ const userController = {
 
             let idUsuario = req.session.user.id;
 
+            console.log(idUsuario);
+
             db.Producto.findAll({
                 //busco los productos que coincidan con el id del usuario
                 where: {
                     vendedor_id: idUsuario
                 }
             }).then(function (productos) {
-                console.log(productos[0].id);
                 // una vez que tengo los productos, busco los comentarios.
                 return db.Comentario.findAll({
                     where: {
                         comentador_id: idUsuario
                     }
                 }).then(function (comentarios) {
-                    //defino los datos del usuario que necesito mostrar en la pagina
+                    //busco los datos del usuario que necesito mostrar en la pagina
+                    return db.Usuario.findByPk(idUsuario)
+                        .then(function (usuario) {
+                            console.log(usuario);
+                            //defino los datos de la persona que ests en sesion.
+                            let idSession = req.session.user.id
+                            console.log(idSession);
+                            //una vez que tengo todo, renderizo a profile.
+                            res.render('profile', {productos: productos, comentarios: comentarios, datosUsuario: usuario, logueado: true, idSession: idSession })
 
-                    let datosUsuario = {
-                        idUsuario: idUsuario,
-                        usuario: req.session.user.usuario,
-                        email: req.session.user.email,
-                        fotoPerfil: req.session.user.foto_perfil
-                    };
-
-                    // defino los datos de la persona que esta en sesion.
-
-                    let idSession = req.session.user.id
-
-                    // una vez que tengo todo, renderizo a profile
-                    res.render('profile', { productos: productos, comentarios: comentarios, datosUsuario: datosUsuario, logueado: true, idSession: idSession })
+                        })
                 })
             })
                 .catch(function (error) {
@@ -60,15 +57,8 @@ const userController = {
         // Primero, chequeo que exista ese usuario en la base de datos.
         db.Usuario.findByPk(idUsuario)
             .then(function (usuario) {
-                // Si existe, busco los datos del usuario.
+                // Si existe, comienzo con mi recoleccion de datos.
                 if (usuario != null) {
-                    let datosUsuario = {
-                        idUsuario: idUsuario,
-                        usuario: usuario.usuario,
-                        email: usuario.email,
-                        fotoPerfil: usuario.foto_perfil
-                    };
-
                     // Busco los productos que coincidan con el id del usuario
                     return db.Producto.findAll({
                         where: {
@@ -83,23 +73,26 @@ const userController = {
                                 }
                             })
                                 .then(function (comentarios) {
-                                    //datos de la persona que esta en sesion:
-                                    let logueado = undefined
+                                    //busco los datos de la persona buscada. 
+                                    return db.Usuario.findByPk(idUsuario)
+                                        .then(function (usuario) {
+                                            //defino los datos de la persona que esta en sesion.
+                                            let logueado = undefined;
 
-                                    if (req.session.user != undefined) {
-                                        logueado = true
-                                        let idSession = req.session.user.id
-                                        //si la persona que esta buscando esta logueada, tambien renderizo sus datos.
-                                        res.render('profile', { productos: productos, comentarios: comentarios, datosUsuario: datosUsuario, logueado: logueado, idSession: idSession });
-                                    };
+                                            if (req.session.user != undefined) {
+                                                logueado = true
+                                                let idSession = req.session.user.id
+                                                //si la persona que esta buscando esta logueada, tambien renderizo sus datos.
+                                                res.render('profile', { productos: productos, comentarios: comentarios, datosUsuario: usuario, logueado: logueado, idSession: idSession });
+                                            };
 
-
-                                    // si la persona que esta buscando no esta logueada, renderizo al perfil estos datos. 
-                                    res.render('profile', { productos: productos, comentarios: comentarios, datosUsuario: datosUsuario, logueado: false, idSession: undefined });
+                                            // si la persona que esta buscando no esta logueada, renderizo al perfil estos datos. 
+                                            res.render('profile', { productos: productos, comentarios: comentarios, datosUsuario: usuario, logueado: false, idSession: undefined });
+                                        })
                                 });
                         });
                 } else {
-                    // Si no existe, lo redirijo a la pagina principal
+                    // Si no existe la persona que quiere buscar, lo redirijo a index
                     res.redirect('/');
                 }
             })
@@ -108,18 +101,15 @@ const userController = {
             });
     },
 
-
     editProfile: function (req, res) {
         //si el usuario esta logueado, dejo que modifique sus datos.
         if (req.session.user != undefined) {
             //recupero sus datos anteriores asi los muestro en la vista.
             let idUsuario = req.session.user.id;
-            console.log(idUsuario);
-
             db.Usuario.findByPk(idUsuario)
-            .then(function (usuario) {
-                return res.render('profile-edit', {datosUsuario: usuario})
-            })
+                .then(function (usuario) {
+                    return res.render('profile-edit', { datosUsuario: usuario })
+                })
 
         } // sino lo mando para que se logue
         else {
@@ -132,33 +122,37 @@ const userController = {
 
         let form = req.body;
 
-        let user = {
-            id: req.session.user.id,
-            usuario: form.usuario,
-            email: form.email,
-            contrasenia: bcrypt.hashSync(form.contrasenia, 10),
-            fecha: form.birthday,
-            dni: form.dni,
-            foto_perfil: '/images/users/' + form.profilePic
-        };
-
-        console.log(user);
-
         let errors = validationResult(req);
 
         if (errors.isEmpty()) {
-            db.Usuario.update( user,
+
+            let user = {
+                id: req.session.user.id,
+                usuario: form.usuario,
+                email: form.email,
+                contrasenia: bcrypt.hashSync(form.contrasenia, 10),
+                fecha: form.birthday,
+                dni: form.dni,
+                foto_perfil: '/images/users/' + form.profilePic
+            };
+
+            db.Usuario.update(user,
                 {
                     where: {
                         id: req.session.user.id
                     }
                 }
-            ).then(function(usuario) {
+            ).then(function (usuario) {
                 res.redirect('/')
             })
 
         } else {
-            return res.render('profile-edit', { errors: errors.mapped(), old: req.body })
+            console.log('estoy en el else');
+            let idUsuario = req.session.user.id;
+            db.Usuario.findByPk(idUsuario)
+                .then(function (usuario) {
+                    return res.render('profile-edit', { errors: errors.mapped(), old: req.body, datosUsuario: usuario })
+                })
         }
 
     },
@@ -194,6 +188,7 @@ const userController = {
             return res.render('register', { errors: errors.mapped(), old: req.body })
         }
     },
+
     login: function (req, res) {
         //Si el usuario está logueado redirigirlo a home
         if (req.session.user != undefined) {
@@ -229,6 +224,7 @@ const userController = {
         }
 
     },
+
     logout: function (req, res) {
         req.session.destroy()
         res.clearCookie("userId")

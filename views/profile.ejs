@@ -32,13 +32,13 @@
 	<section class="info-usuario container products-wrapper">
 		<div class="row">
 			<div class="img-container offset-3 col-2">
-				<img src="<%= datosUsuario.fotoPerfil%>" alt="foto de perfil" class="foto-perfil">
+				<img src="<%= datosUsuario.foto_perfil%>" alt="foto de perfil" class="foto-perfil">
 			</div>
 			<div class="data-container col-6">
 				<div class="d-flex align-items-center ">
 					<h1 class="main-title"> <%= datosUsuario.usuario%> 
 	<!-- si el usuario esta logueado y esta viendo su propia pagina de perfil, voy a dejar que edite sus datos. -->
-						<%if (logueado && idSession == datosUsuario.idUsuario) {%>
+						<%if (logueado && idSession == datosUsuario.id) {%>
 							<a href="/users/profile-edit">
 								<i class="fas fa-cog"></i>
 							</a>
