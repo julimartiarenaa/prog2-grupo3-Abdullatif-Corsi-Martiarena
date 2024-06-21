@@ -33,8 +33,13 @@ const userController = {
                         email: req.session.user.email,
                         fotoPerfil: req.session.user.foto_perfil
                     };
+
+                    // defino los datos de la persona que esta en sesion.
+
+                    let idSession = req.session.user.id
+
                     // una vez que tengo todo, renderizo a profile
-                    res.render('profile', { productos: productos, comentarios: comentarios, datosUsuario: datosUsuario })
+                    res.render('profile', { productos: productos, comentarios: comentarios, datosUsuario: datosUsuario, logueado: true, idSession: idSession })
                 })
             })
                 .catch(function (error) {
@@ -49,6 +54,7 @@ const userController = {
     },
 
     profile: function (req, res) {
+
         let idUsuario = req.params.id;
 
         // Primero, chequeo que exista ese usuario en la base de datos.
@@ -77,10 +83,19 @@ const userController = {
                                 }
                             })
                                 .then(function (comentarios) {
-                                    // Ahora que tengo todos los datos, renderizo al perfil.
-                                    res.render('profile', {
-                                        productos: productos, comentarios: comentarios, datosUsuario: datosUsuario
-                                    });
+                                    //datos de la persona que esta en sesion:
+                                    let logueado = undefined
+
+                                    if (req.session.user != undefined) {
+                                        logueado = true
+                                        let idSession = req.session.user.id
+                                        //si la persona que esta buscando esta logueada, tambien renderizo sus datos.
+                                        res.render('profile', { productos: productos, comentarios: comentarios, datosUsuario: datosUsuario, logueado: logueado, idSession: idSession });
+                                    };
+
+
+                                    // si la persona que esta buscando no esta logueada, renderizo al perfil estos datos. 
+                                    res.render('profile', { productos: productos, comentarios: comentarios, datosUsuario: datosUsuario, logueado: false, idSession: undefined });
                                 });
                         });
                 } else {
@@ -95,9 +110,57 @@ const userController = {
 
 
     editProfile: function (req, res) {
-        let productos = datos.productos
-        let usuario = datos.usuario
-        res.render("profile-edit", { productos: productos, usuario: usuario })
+        //si el usuario esta logueado, dejo que modifique sus datos.
+        if (req.session.user != undefined) {
+            //recupero sus datos anteriores asi los muestro en la vista.
+            let idUsuario = req.session.user.id;
+            console.log(idUsuario);
+
+            db.Usuario.findByPk(idUsuario)
+            .then(function (usuario) {
+                return res.render('profile-edit', {datosUsuario: usuario})
+            })
+
+        } // sino lo mando para que se logue
+        else {
+            res.redirect('/users/login')
+        }
+    },
+
+    editProfileStore: function (req, res) {
+        //recupero los datos del usuario, que ya esta logueado, sino no estaria aca.
+
+        let form = req.body;
+
+        let user = {
+            id: req.session.user.id,
+            usuario: form.usuario,
+            email: form.email,
+            contrasenia: bcrypt.hashSync(form.contrasenia, 10),
+            fecha: form.birthday,
+            dni: form.dni,
+            foto_perfil: '/images/users/' + form.profilePic
+        };
+
+        console.log(user);
+
+        let errors = validationResult(req);
+
+        if (errors.isEmpty()) {
+            db.Usuario.update( user,
+                {
+                    where: {
+                        id: req.session.user.id
+                    }
+                }
+            ).then(function(usuario) {
+                res.redirect('/')
+            })
+
+        } else {
+            return res.render('profile-edit', { errors: errors.mapped(), old: req.body })
+        }
+
     },
 
     registerCreate: function (req, res) {
@@ -117,6 +180,7 @@ const userController = {
             dni: form.dni,
             foto_perfil: '/images/users/' + form.profilePic
         };
+
         console.log(user);
 
         let errors = validationResult(req);

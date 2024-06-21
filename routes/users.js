@@ -47,6 +47,7 @@ const registerValidations = [
     body('email')
         .notEmpty().withMessage('Por favor complete el campo email.')
         .isEmail().withMessage('Por favor ingrese un email válido.')
+        //busco si el mail ya se encuentra registrado
         .custom(function (value) {
             return db.Usuario.findOne({
                 where: { email: value }
@@ -61,13 +62,23 @@ const registerValidations = [
         .notEmpty().withMessage('Por favor, complete el campo usuario.'),
     body('contrasenia')
         .notEmpty().withMessage('Por favor, complete el campo contraseña.')
-        .isStrongPassword({minLength: 6, minUppercase:1, minLowercase:4, minNumbers: 0, minSymbols:0}).withMessage('La contraseña debe tener 6 caracteres y al menos una mayuscula.'),
+        .isStrongPassword({ minLength: 6, minUppercase: 1, minLowercase: 4, minNumbers: 0, minSymbols: 0 }).withMessage('La contraseña debe tener 6 caracteres y al menos una mayuscula.'),
     body('birthday')
         .notEmpty().withMessage('Por favor, complete el campo fecha de nacimiento.')
         .isDate().withMessage('Por favor, ingrese la fecha en formato AAA/MM/DD'),
     body('dni')
         .notEmpty().withMessage('Por favor, complete el campo DNI.')
-        .isInt().withMessage('Por favor, el campo solo debe tener numeros.'),
+        //busco si el dni ya existe, pues debe ser unico (lo definimos asi en nuestra db).
+        .custom(function (value) {
+            return db.Usuario.findOne({
+                where: { dni: value }
+            })
+                .then(function (usuario) {
+                    if (usuario) {
+                        throw new Error('El dni ingresado ya se encuentra registrado')
+                    }
+                })
+        }),
     body('profilePic')
         .notEmpty().withMessage('Por favor, ingrese una foto')
 ]
@@ -79,7 +90,10 @@ router.get('/', function (req, res, next) {
 
 router.get('/profile', userController.profilePersonal);
 router.get('/profile/:id', userController.profile);
+
 router.get('/profile-edit', userController.editProfile);
+//profile-edit utiliza las mismas validaciones que en register (consigna).
+router.post('/profile-edit/store', registerValidations, userController.editProfileStore);
 
 router.get('/register', userController.registerCreate);
 router.post('/register/store', registerValidations, userController.registerStore);

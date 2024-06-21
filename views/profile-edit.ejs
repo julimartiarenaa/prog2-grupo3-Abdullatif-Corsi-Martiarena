@@ -38,25 +38,49 @@
 			</div>
 			<!-- Show the "ultimos" products -->
 
-			<form class="login" action="" method="GET"> <!-- el action queda para la 2da parte de la materia. --> 
+			<form class="login" action="/users/profile-edit/store" method="post">  
 
 				<label for="email">Email:</label>
-				<input type="email" name="email" id="email">
+				<input type="email" name="email" id="email" placeholder="<%= datosUsuario.email%>" value="<%= locals.old !== undefined && old.email ? old.email : "" %>">
+
+				<% if (locals.errors && errors.email){ %>
+					<p> <%= errors.email.msg %></p>
+				  <% } %>
 
 				<label for="usuario">Usuario:</label>
-				<input type="text" name="usuario" id="usuario">
+				<input type="text" name="usuario" id="usuario" placeholder="<%= datosUsuario.usuario%>" value="<%= locals.old !== undefined && old.usuario ? old.usuario : "" %>">
+
+				<% if (locals.errors && errors.usuario){ %>
+					<p> <%= errors.usuario.msg %></p>
+				  <% } %>
 
 				<label for="contrasenia">Contraseña:</label>
 				<input type="password" name="contrasenia" id="contrasenia">
 
-				<label for="birthday">Fecha de Nacimiento:</label>
-				<input type="text" name="birthday" id="birthday">
+				<% if (locals.errors && errors.contrasenia){ %>
+					<p> <%= errors.contrasenia.msg %></p>
+				  <% } %>
 
-				<label for="DNI">DNI:</label>
-				<input type="number" name="DNI" id="DNI">
+				<label for="birthday">Fecha de Nacimiento:</label>
+				<input type="text" name="birthday" id="birthday" placeholder="<%= datosUsuario.fecha%>" value="<%= locals.old !== undefined && old.birthday ? old.birthday : "" %>">
+
+				<% if (locals.errors && errors.birthday){ %>
+					<p> <%= errors.birthday.msg %></p>
+				  <% } %>
+
+				<label for="dni">DNI:</label>
+				<input type="number" name="dni" id="dni" placeholder="<%= datosUsuario.dni%>" value="<%= locals.old !== undefined && old.dni ? old.dni : "" %>">
+
+				<% if (locals.errors && errors.dni){ %>
+					<p> <%= errors.dni.msg %></p>
+				  <% } %>
 
 				<label for="profilePic">Foto de Perfil:</label>
-				<input type="file" name="profilePic" id="profilePic">
+				<input type="text" name="profilePic" id="profilePic" placeholder="<%= datosUsuario.foto_perfil%>" value="<%= locals.old !== undefined && old.profilePic ? old.profilePic : "" %>">
+
+				<% if (locals.errors && errors.profilePic){ %>
+					<p> <%= errors.profilePid.msg %></p>
+				  <% } %>
 
 				<input class="done" type="submit" value="Edita tu perfil">
 

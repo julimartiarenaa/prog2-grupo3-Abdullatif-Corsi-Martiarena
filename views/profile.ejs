@@ -37,9 +37,12 @@
 			<div class="data-container col-6">
 				<div class="d-flex align-items-center ">
 					<h1 class="main-title"> <%= datosUsuario.usuario%> 
-						<a href="/profile/profile-edit">
-							<i class="fas fa-cog"></i>
-						</a>
+	<!-- si el usuario esta logueado y esta viendo su propia pagina de perfil, voy a dejar que edite sus datos. -->
+						<%if (logueado && idSession == datosUsuario.idUsuario) {%>
+							<a href="/users/profile-edit">
+								<i class="fas fa-cog"></i>
+							</a>
+						<%}%>
 					</h1>
 					<a class="btn mt-3 ml-4" href="">SEGUIR</a>
 				</div>
