@@ -4,7 +4,18 @@ const productController = require('../controllers/productController');
 const { body } = require("express-validator");
 
 
-let validation = [
+let validationCreate = [
+    body("imagen")
+    .notEmpty().withMessage("Debe incluir una imagen del producto"),
+
+    body("nombre")
+    .notEmpty().withMessage("Debe incluir un nombre del producto"),
+
+    body("descripcion")
+    .notEmpty().withMessage("Debe incluir una descripción del producto")
+]
+
+let validationEdit = [
     body("imagen")
     .notEmpty().withMessage("Debe incluir una imagen del producto"),
 
@@ -18,6 +29,9 @@ let validation = [
 router.get('/:id', productController.product);
 router.get('/delete/:id', productController.deleteProduct);
 router.get('/product-add', productController.addProduct); 
-router.post("/store", validation, productController.store); //--> es lo que va en el action 
+router.post("/store", validationCreate, productController.create); //--> es lo que va en el action 
+// router.get('/product-add', productController.editProduct); 
+// router.post("/store", validationCreate, productController.edit); //--> es lo que va en el action 
+router.get('search-results', productController.buscador)
 
 module.exports = router
