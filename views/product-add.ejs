@@ -42,18 +42,28 @@
 					
 					<label for="imagen">Imagen:</label>
 					<input type="text" id="imagen" name="imagen" required>
+
+					<% if(locals.errors && errors.comentario){ %>
+						<p> <%= errors.imagen.msg %></p>
+					  <% } %>
 				
 					<label for="nombre">Nombre del Producto:</label>
 					<input type="text" id="nombre" name="nombre" required>
+
+					<% if(locals.errors && errors.comentario){ %>
+						<p> <%= errors.nombre.msg %></p>
+					  <% } %>
 				
 					<label for="descripcion" >Descripción:</label>
 					<textarea id="descripcion" name="descripcion"  cols="50" rows="15" required></textarea>
+
+					<% if(locals.errors && errors.comentario){ %>
+						<p> <%= errors.descripcion.msg %></p>
+					  <% } %>
+
 					<input  class="done" type="submit" value="Crear Producto">
 				</form>
 
-				<% if(locals.errors && errors.comentario){ %>
-					<p> <%= errors.comentario.msg %></p>
-				  <% } %>
 
 			<%} else {%>
 				<p><a href="/users/login" class="buy-now-button">¡Ingresá para comentar!</a></p>
