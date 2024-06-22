@@ -1,5 +1,8 @@
 const db = require("../database/models")
 let dbProducto = db.Producto;
+const { validationResult } = require('express-validator');
+
+
 
 const productController = {
 
@@ -28,8 +31,11 @@ const productController = {
 
         ]})
         .then(function (producto) {
-            console.log(producto.comentarios);
-                    return db.Usuario.findAll()
+                    return db.Usuario.findAll({
+                        where: {
+                            id: vendedor_id
+                        }
+                    })
                     .then(function (usuario) {
                     
 
@@ -62,21 +68,69 @@ const productController = {
 
     store: function(req, res){
 
-        let form = req.body;
-        db.Producto.create(form)
+        // solo si el usuario esta logueado puede crear un producto
+        if (req.session.user != undefined) {
 
-        .then(function(result){
-            return res.redirect("/")
-        })
-        .catch(error=>console.log(error))
+            let idUsuario = req.session.user.id;
+            let usuario = req.session.user.nombre;
+
+            let form = req.body;
+
+            let product = {
+                vendedor_id: idUsuario,
+                vendedor: usuario,
+                url_imagen: form.imagen,
+                nombre: form.nombre,
+                descripcion: form.descripcion
+            }
+        } else {
+            return res.redirect('/users/login');
+        }
+
+        let errors = validationResult(req);
+
+        if (errors.isEmpty()) {
+            db.Producto.create(product)
+                .then(function(result){
+                    return res.redirect("/")
+                })
+        } else {
+            return res.render('product-add', { errors: errors.mapped(), old: req.body })
+        }
 
     },
 
+    // registerStore: function (req, res) {
+
+    //     let form = req.body;
+
+    //     let user = {
+    //         email: form.email,
+    //         usuario: form.usuario,
+    //         contrasenia: bcrypt.hashSync(form.contrasenia, 10),
+    //         fecha: form.birthday,
+    //         dni: form.dni,
+    //         foto_perfil: '/images/users/' + form.profilePic
+    //     };
+
+    //     console.log(user);
+
+    //     let errors = validationResult(req);
+
+    //     if (errors.isEmpty()) {
+    //         db.Usuario.create(user)
+    //             .then(function (result) {
+    //                 return res.redirect("/")
+    //             })
+    //     } else {
+    //         return res.render('register', { errors: errors.mapped(), old: req.body })
+    //     }
+    // },
+
 }
 
-
-/* {include: [
-    {association: "comentarios"},
-    {association: "usuarios"}
-]}*/
 module.exports = productController;
+
+
+
+    

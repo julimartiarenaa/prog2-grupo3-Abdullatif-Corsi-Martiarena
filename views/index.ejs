@@ -47,12 +47,13 @@
 
 				<div class="col-12 col-sm-6 col-lg-3">
 					<section class="product-box">
-						<a href="/products">
+						<a href="/products/<%=[i].id%>"> <!-- /:id -->
 							<figure class="product-box_image">
 								<img src=<%= productos[i].url_imagen %> alt=<%= productos[i].nombre %> > 
 							</figure>
 							<article class="product-box_data">
-								<h2><%= productos[i].nombre %></h2></h2>
+								<h2><%= productos[i].nombre %></h2>
+								<!-- <h3><%= productos[i].vendedor_id %></h3> !!! ACA VA EL NOMBRE DEL CREADOR !!! -->
 								<p ></p><%= productos[i].descripcion %></p>
 							
 							</article>
@@ -65,37 +66,6 @@
 		</div>
 	</div>
 	<!-- /Novedades -->
-
-	<!-- Más comentados -->
-	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Más comentados</h2>
-			</div>
-			<!-- Show the "ultimos" products -->
-			
-			<% for(let i = 0; i < 8; i++) { %>
-
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/products" >
-							<figure class="product-box_image">
-								<img src=<%= productos[i].url_imagen %> alt=<%= productos[i].nombre %> > 
-							</figure>
-							<article class="product-box_data">
-								<h2></h2><%= productos[i].nombre %></h2>
-								<p></p><%= productos[i].descripcion %></p>
-
-							</article>
-						</a>
-					</section>
-				</div>
-
-			<% } %>
-
-		</div>
-	</div>
-	<!-- /Más comentados -->
 
 	<!-- footer -->
 	<%- include('./partials/footer')%>
