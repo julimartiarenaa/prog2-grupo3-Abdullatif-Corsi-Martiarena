@@ -48,8 +48,8 @@
 								</figure>
 								<article class="product-box_data">
 									<h2><%= productos[i].nombre %></h2>
-									<!-- <h3><%= productos[i].vendedor_id %></h3> !!! ACA VA EL NOMBRE DEL CREADOR !!! -->
 									<p ><%= productos[i].descripcion %></p>
+									Cargado por: <a href="/users/profile/<%= productos[i].usuarios.id %>"><%= productos[i].usuarios.usuario  %></a> 
 								
 								</article>
 							</a>

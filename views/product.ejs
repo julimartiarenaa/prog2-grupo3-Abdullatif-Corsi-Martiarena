@@ -78,14 +78,14 @@
                                 <div class="data">
                                     <p class="user">
 										
-										<!-- <% let usuarioNombre = null%>
+										<% let usuarioNombre = null%>
 										<% for (let ii = 0; ii < usuario.length; ii++) { %>
 											<%if (usuario[ii].id == producto.comentarios[i].comentador_id) { %>
 												<% usuarioNombre = usuario[ii].usuario %>
 												<% usuarioId = usuario[ii].id %>
 												<%break %>
 												<% } %>
-											<%} %> -->
+											<%} %>
                                         <strong> <a href="/users/profile/<%= usuarioId %>"> <%= usuarioNombre  %> </a> </strong>
                                         <%= producto.comentarios[i].comentario %> 
 									</p>
