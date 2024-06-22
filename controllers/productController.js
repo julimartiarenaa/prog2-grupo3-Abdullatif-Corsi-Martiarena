@@ -28,10 +28,8 @@ const productController = {
 
         ]})
         .then(function (producto) {
-            console.log(producto.comentarios);
                     return db.Usuario.findAll()
                     .then(function (usuario) {
-                    
 
                     res.render('product', {producto: producto, usuario: usuario})
                 })})
