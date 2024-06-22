@@ -3,12 +3,8 @@ const router = express.Router();
 const productController = require('../controllers/productController');
 const { body } = require("express-validator");
 
-router.get('/:id', productController.product);
-router.get('/delete/:id', productController.deleteProduct);
-router.get('/product-add', productController.addProduct); //es lo mismo product-add que product.create?
-router.post("/store", productController.store); //--> es lo que va en el action
 
-let validation = [
+let validationCreate = [
     body("imagen")
     .notEmpty().withMessage("Debe incluir una imagen del producto"),
 
@@ -18,5 +14,24 @@ let validation = [
     body("descripcion")
     .notEmpty().withMessage("Debe incluir una descripción del producto")
 ]
+
+let validationEdit = [
+    body("imagen")
+    .notEmpty().withMessage("Debe incluir una imagen del producto"),
+
+    body("nombre")
+    .notEmpty().withMessage("Debe incluir un nombre del producto"),
+
+    body("descripcion")
+    .notEmpty().withMessage("Debe incluir una descripción del producto")
+]
+
+router.get('/:id', productController.product);
+router.get('/delete/:id', productController.deleteProduct);
+router.get('/product-add', productController.addProduct); // lo que va en la url
+router.post("/store", validationCreate, productController.create); //--> es lo que va en el action 
+// router.get('/product-add', productController.editProduct); // lo que va en la url
+// router.post("/store", validationCreate, productController.edit); //--> es lo que va en el action 
+router.get('search-results', productController.buscador)
 
 module.exports = router

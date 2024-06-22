@@ -37,11 +37,33 @@
 				<h2 class="products-title">Resultados de búsqueda</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
-			<h2 class="col-12"> <i>///////////////////////////////////////// <br> Acá van los resultados de búsqueda. <br>
-			Eliminen estás líneas y cosntruyan la página de resultados de búsqueda. <br>
-			////////////////
-			</h2>
+			<% if (productos.results != undefined ){ %>
+				<% for(let i = 0; i < productos.results.lenght ; i++) { %>
 
+					<div class="col-12 col-sm-6 col-lg-3">
+						<section class="product-box">
+							<a href="/products/<%=productos[i].id%>"> <!-- /:id -->
+								<figure class="product-box_image">
+									<img src=<%= productos[i].url_imagen %> alt=<%= productos[i].nombre %> > 
+								</figure>
+								<article class="product-box_data">
+									<h2><%= productos[i].nombre %></h2>
+									<p ><%= productos[i].descripcion %></p>
+									Cargado por: <a href="/users/profile/<%= productos[i].usuarios.id %>"><%= productos[i].usuarios.usuario  %></a> 
+								
+								</article>
+							</a>
+						</section>
+					</div>
+	
+				<% } %>	
+				<%} else{  %>
+					<h2>No hay resultados para su criterio de búsqueda</h2>
+			<% } %>
+			
+
+		</div>
+	</div>
 
 	<!-- footer -->
 	<%- include('./partials/footer')%>
