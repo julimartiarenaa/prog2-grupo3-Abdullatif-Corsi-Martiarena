@@ -10,31 +10,25 @@ const userController = {
         //Si el usuario está logueado le mostrare su perfil
         if (req.session.user != undefined) {
 
-            let idUsuario = req.session.user.id;
-
-            console.log(idUsuario);
+            let idSession = req.session.user.id;
 
             db.Producto.findAll({
                 //busco los productos que coincidan con el id del usuario
                 where: {
-                    vendedor_id: idUsuario
+                    vendedor_id: idSession
                 }
             }).then(function (productos) {
                 // una vez que tengo los productos, busco los comentarios.
                 return db.Comentario.findAll({
                     where: {
-                        comentador_id: idUsuario
+                        comentador_id: idSession
                     }
                 }).then(function (comentarios) {
                     //busco los datos del usuario que necesito mostrar en la pagina
-                    return db.Usuario.findByPk(idUsuario)
+                    return db.Usuario.findByPk(idSession)
                         .then(function (usuario) {
-                            console.log(usuario);
-                            //defino los datos de la persona que ests en sesion.
-                            let idSession = req.session.user.id
-                            console.log(idSession);
                             //una vez que tengo todo, renderizo a profile.
-                            res.render('profile', {productos: productos, comentarios: comentarios, datosUsuario: usuario, logueado: true, idSession: idSession })
+                            res.render('profile', { productos: productos, comentarios: comentarios, datosUsuario: usuario, logueado: true, idSession: idSession })
 
                         })
                 })
@@ -52,38 +46,37 @@ const userController = {
 
     profile: function (req, res) {
 
-        let idUsuario = req.params.id;
+        let idUsuarioBuscado = req.params.id;
 
         // Primero, chequeo que exista ese usuario en la base de datos.
-        db.Usuario.findByPk(idUsuario)
+        db.Usuario.findByPk(idUsuarioBuscado)
             .then(function (usuario) {
                 // Si existe, comienzo con mi recoleccion de datos.
                 if (usuario != null) {
                     // Busco los productos que coincidan con el id del usuario
                     return db.Producto.findAll({
                         where: {
-                            vendedor_id: idUsuario
+                            vendedor_id: idUsuarioBuscado
                         }
                     })
                         .then(function (productos) {
                             // Una vez que tengo los productos, busco los comentarios.
                             return db.Comentario.findAll({
                                 where: {
-                                    comentador_id: idUsuario
+                                    comentador_id: idUsuarioBuscado
                                 }
                             })
                                 .then(function (comentarios) {
                                     //busco los datos de la persona buscada. 
-                                    return db.Usuario.findByPk(idUsuario)
+                                    return db.Usuario.findByPk(idUsuarioBuscado)
                                         .then(function (usuario) {
                                             //defino los datos de la persona que esta en sesion.
                                             let logueado = undefined;
 
                                             if (req.session.user != undefined) {
-                                                logueado = true
                                                 let idSession = req.session.user.id
                                                 //si la persona que esta buscando esta logueada, tambien renderizo sus datos.
-                                                res.render('profile', { productos: productos, comentarios: comentarios, datosUsuario: usuario, logueado: logueado, idSession: idSession });
+                                                res.render('profile', { productos: productos, comentarios: comentarios, datosUsuario: usuario, logueado: true, idSession: idSession });
                                             };
 
                                             // si la persona que esta buscando no esta logueada, renderizo al perfil estos datos. 
@@ -105,8 +98,8 @@ const userController = {
         //si el usuario esta logueado, dejo que modifique sus datos.
         if (req.session.user != undefined) {
             //recupero sus datos anteriores asi los muestro en la vista.
-            let idUsuario = req.session.user.id;
-            db.Usuario.findByPk(idUsuario)
+            let idSession = req.session.user.id;
+            db.Usuario.findByPk(idSession)
                 .then(function (usuario) {
                     return res.render('profile-edit', { datosUsuario: usuario })
                 })
@@ -118,43 +111,50 @@ const userController = {
     },
 
     editProfileStore: function (req, res) {
-        //recupero los datos del usuario, que ya esta logueado, sino no estaria aca.
+        //vuelvo a preguntar si esta logueado, se prodia haber expirado el tiempo de sesion.
+        if (req.session.user != undefined) {
+            let form = req.body;
 
-        let form = req.body;
+            console.log(form);
 
-        let errors = validationResult(req);
+            let errors = validationResult(req);
+            console.log(errors);
+            // si no hay errores, dejo que se actualize la informacion
+            if (errors.isEmpty()) {
 
-        if (errors.isEmpty()) {
+                let user = {
+                    id: req.session.user.id,
+                    usuario: form.usuario,
+                    email: form.email,
+                    contrasenia: bcrypt.hashSync(form.contrasenia, 10),
+                    fecha: form.fecha,
+                    dni: form.dni,
+                    foto_perfil: '/images/users/' + form.profilePic
+                };
 
-            let user = {
-                id: req.session.user.id,
-                usuario: form.usuario,
-                email: form.email,
-                contrasenia: bcrypt.hashSync(form.contrasenia, 10),
-                fecha: form.birthday,
-                dni: form.dni,
-                foto_perfil: '/images/users/' + form.profilePic
-            };
-
-            db.Usuario.update(user,
-                {
-                    where: {
-                        id: req.session.user.id
+                db.Usuario.update(user,
+                    {
+                        where: {
+                            id: user.id
+                        }
                     }
-                }
-            ).then(function (usuario) {
-                res.redirect('/')
-            })
-
-        } else {
-            console.log('estoy en el else');
-            let idUsuario = req.session.user.id;
-            db.Usuario.findByPk(idUsuario)
-                .then(function (usuario) {
-                    return res.render('profile-edit', { errors: errors.mapped(), old: req.body, datosUsuario: usuario })
+                ).then(function (usuario) {
+                    res.redirect('/')
                 })
-        }
 
+            } else {
+                // sino, lo redirijo hacia la vista de nuevo
+                let idUsuario = req.session.user.id
+
+                db.Usuario.findByPk(idUsuario)
+                    .then(function (usuario) {
+                        return res.render('profile-edit', { errors: errors.mapped(), old: req.body, datosUsuario: usuario })
+                    })
+            }
+        } // sino lo mando para que se logue
+        else {
+            res.redirect('/users/login')
+        }
     },
 
     registerCreate: function (req, res) {
@@ -170,7 +170,7 @@ const userController = {
             email: form.email,
             usuario: form.usuario,
             contrasenia: bcrypt.hashSync(form.contrasenia, 10),
-            fecha: form.birthday,
+            fecha: form.fecha,
             dni: form.dni,
             foto_perfil: '/images/users/' + form.profilePic
         };
