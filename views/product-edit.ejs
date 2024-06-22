@@ -34,7 +34,7 @@
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="products-title" >Agregar productos</h2>
+				<h2 class="products-title" >Editar productos</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
 			<% if (locals.user != undefined) { %>
@@ -61,12 +61,12 @@
 						<p> <%= errors.descripcion.msg %></p>
 					  <% } %>
 
-					<input  class="done" type="submit" value="Crear Producto">
+					<input  class="done" type="submit" value="Guardar Cambios">
 				</form>
 
 
 			<%} else {%>
-				<p><a href="/users/login" class="buy-now-button">¡Ingresá para crear un producto!</a></p>
+				<p><a href="/users/login" class="buy-now-button">¡Ingresá para editar!</a></p>
 			<%} %>
 
 

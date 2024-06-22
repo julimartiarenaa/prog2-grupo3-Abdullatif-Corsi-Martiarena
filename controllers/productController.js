@@ -32,7 +32,7 @@ const productController = {
             include: [
             {association: "comentarios"},
             {association: "usuarios"}],
-            
+
             order: [["createdAt", "DESC"]]
         })
             .then(function (productos) {
@@ -119,39 +119,38 @@ const productController = {
 
     },
 
-    // edit: function(req, res){ // completar/corregir toda esta parte
+    edit: function(req, res){ // completar/corregir toda esta parte
 
-    //     // CONTROL SI EL USUARIO ES VENDEDOR
-    //     if (req.session.user != undefined) {
+        if (req.session.user != undefined) {
 
-    //         let idUsuario = req.session.user.id;
-    //         let usuario = req.session.user.nombre;
+            let idUsuario = req.session.user.id;
+            let usuario = req.session.user.nombre;
 
-    //         let form = req.body;
+            let form = req.body;
 
-    //         let product = {
-    //             vendedor_id: idUsuario,
-    //             vendedor: usuario,
-    //             url_imagen: form.imagen,
-    //             nombre: form.nombre,
-    //             descripcion: form.descripcion
-    //         }
-    //     } else {
-    //         return res.redirect('/users/login');
-    //     }
+            let product = {
+                vendedor_id: idUsuario,
+                vendedor: usuario,
+                url_imagen: form.imagen,
+                nombre: form.nombre,
+                descripcion: form.descripcion
+            }
+        } else {
+            return res.redirect('/users/login');
+        }
 
-    //     let errors = validationResult(req);
+        let errors = validationResult(req);
 
-    //     if (errors.isEmpty()) {
-    //         db.Producto.update(product, {where:[{id:form.id}]}) //product se puede reemplazar por form
-    //             .then(function(result){
-    //                 return res.redirect("/")
-    //             })
-    //     } else {
-    //         return res.render('product-add', { errors: errors.mapped(), old: req.body })
-    //     }
+        if (errors.isEmpty()) {
+            db.Producto.update(product, {where:[{id:form.id}]}) //product se puede reemplazar por form
+                .then(function(result){
+                    return res.redirect("/")
+                })
+        } else {
+            return res.render('product-add', { errors: errors.mapped(), old: req.body })
+        }
 
-    // }
+    }
 
     // registerStore: function (req, res) {
 
