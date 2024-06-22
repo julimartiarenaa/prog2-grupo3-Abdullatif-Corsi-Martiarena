@@ -28,10 +28,13 @@ const productController = {
     },
 
     index: function (req, res) {
-        dbProducto.findAll({include: [
+        dbProducto.findAll({
+            include: [
             {association: "comentarios"},
-            {association: "usuarios"}
-        ]})
+            {association: "usuarios"}],
+            
+            order: [["createdAt", "DESC"]]
+        })
             .then(function (productos) {
                 res.render("index", {productos: productos})
             })
@@ -45,7 +48,6 @@ const productController = {
         let idProducto = req.params.id
         dbProducto.findByPk(idProducto, {include: [
             {association: "comentarios", 
-                // include: [{association: "usuarios"}],
                 separate: true,
                 order: [["createdAt", "DESC"]]
             },
