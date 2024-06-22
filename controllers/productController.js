@@ -92,12 +92,14 @@ const productController = {
         // solo si el usuario esta logueado puede crear un producto
         if (req.session.user != undefined) {
 
-            // let idUsuario = req.session.user.id;
+            let idUsuario = req.session.user.id;
             // let usuario = req.session.user.nombre;
 
             let form = req.body;
 
             let product = {
+                vendedor_id: idUsuario,
+                // vendedor: usuario,
                 url_imagen: form.imagen,
                 nombre: form.nombre,
                 descripcion: form.descripcion
@@ -124,13 +126,13 @@ const productController = {
         if (req.session.user != undefined) {
 
             let idUsuario = req.session.user.id;
-            let usuario = req.session.user.nombre;
+            // let usuario = req.session.user.nombre;
 
             let form = req.body;
 
             let product = {
                 vendedor_id: idUsuario,
-                vendedor: usuario,
+                // vendedor: usuario,
                 url_imagen: form.imagen,
                 nombre: form.nombre,
                 descripcion: form.descripcion
