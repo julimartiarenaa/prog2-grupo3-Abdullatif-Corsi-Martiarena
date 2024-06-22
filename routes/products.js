@@ -29,9 +29,9 @@ let validationEdit = [
 router.get('/:id', productController.product);
 router.get('/delete/:id', productController.deleteProduct);
 router.get('/product-add', productController.addProduct); // lo que va en la url
-router.post("/store", validationCreate, productController.create); //--> es lo que va en el action 
-// router.get('/product-add', productController.editProduct); // lo que va en la url
-// router.post("/store", validationCreate, productController.edit); //--> es lo que va en el action 
+router.post("/create", validationCreate, productController.create); //--> es lo que va en el action 
+router.get('/product-edit/:id', productController.editProduct); // lo que va en la url
+router.post("/edit", validationEdit, productController.edit); //--> es lo que va en el action 
 router.get('search-results', productController.buscador)
 
 module.exports = router

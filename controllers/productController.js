@@ -100,7 +100,7 @@ const productController = {
             let product = {
                 vendedor_id: idUsuario,
                 // vendedor: usuario,
-                url_imagen: form.imagen,
+                url_imagen: form.url_imagen,
                 nombre: form.nombre,
                 descripcion: form.descripcion
             }
@@ -112,7 +112,7 @@ const productController = {
 
         if (errors.isEmpty()) {
             db.Producto.create(product)
-                .then(function(result){
+                .then(function(results){
                     return res.redirect("/")
                 })
         } else {
@@ -126,14 +126,12 @@ const productController = {
         if (req.session.user != undefined) {
 
             let idUsuario = req.session.user.id;
-            // let usuario = req.session.user.nombre;
 
             let form = req.body;
 
             let product = {
                 vendedor_id: idUsuario,
-                // vendedor: usuario,
-                url_imagen: form.imagen,
+                url_imagen: form.url_imagen,
                 nombre: form.nombre,
                 descripcion: form.descripcion
             }
@@ -152,34 +150,101 @@ const productController = {
             return res.render('product-add', { errors: errors.mapped(), old: req.body })
         }
 
+    },
+
+    editProduct: function(req, res){
+
+        let id = req.params.id
+
+        db.Producto.findByPk(id)
+        .then(function (results){
+            return res.render("product-edit", {producto: results})
+        })},
+
+    editt: function(req, res){
+
+        if (errors.isEmpty()) { //si no hay errores, mandar info del form y redirigir al producto editado
+            
+            let form = req.body
+
+            let product = {
+                vendedor_id: idUsuario,
+                url_imagen: form.url_imagen,
+                nombre: form.nombre,
+                descripcion: form.descripcion
+            }
+
+            db.Producto.update(product, {where: [{id: form.id}]})
+                .then(function (result){
+                    return res.redirect("/products/" + form.id)
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+
+        } else { //si HAY errores, mostrarlos en la vista
+
+            let id = req.params.id
+
+            db.Producto.findByPk(id, {include: [{ association: 'usuarios' }]})
+                .then(function (results){
+                    return res.render('product-add', { producto: results, errors: errors.mapped(), old: req.body })
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+
+        }
+
+        db.Producto.findByPk(idProducto, {
+            include: [
+                { association: 'usuarios' }
+            ]
+        })
+            .then(function (producto) {
+                //return res.send(errors.mapped())
+                return res.render('product-edit', { producto: producto, errors: errors.mapped(), old: req.body });
+            })
+            .catch(function (e) {
+                console.log(e);
+            })
+        
+
+        db.Producto.update(product, {where:[{id:form.id}]}) //product se puede reemplazar por form
+                .then(function(result){
+                    return res.redirect("/")
+                })
+        
     }
 
-    // registerStore: function (req, res) {
-
-    //     let form = req.body;
-
-    //     let user = {
-    //         email: form.email,
-    //         usuario: form.usuario,
-    //         contrasenia: bcrypt.hashSync(form.contrasenia, 10),
-    //         fecha: form.birthday,
-    //         dni: form.dni,
-    //         foto_perfil: '/images/users/' + form.profilePic
-    //     };
-
-    //     console.log(user);
-
-    //     let errors = validationResult(req);
-
-    //     if (errors.isEmpty()) {
-    //         db.Usuario.create(user)
-    //             .then(function (result) {
-    //                 return res.redirect("/")
-    //             })
-    //     } else {
-    //         return res.render('register', { errors: errors.mapped(), old: req.body })
-    //     }
-    // },
+//     let errors = validationResult(req)
+//     if (errors.isEmpty()) {
+//       let id = req.params.id
+//       let form = req.body;
+//       let producto_editado = {
+//         nombreProducto: form.nombreProducto ,
+//         imagen: form.imagen ,
+//         descripcion: form.descripcion,
+//         idUsuario: req.session.user.id,
+//       }
+//       filtrar = {
+//         where : [{id : id}]
+//       }
+//       db.Producto.update(producto_editado, filtrar).then(function(){
+//         return res.redirect("/") 
+//       })
+    
+//     } else{
+//       let id = req.params.id
+//       db.Producto.findByPk(id).then(function(result){
+//         return res.render("product-edit", {
+//           result : result,
+//           errors: errors.mapped(),
+//           old: req.body
+//         })
+//       })
+//     }
+//   }
 
 }
 
