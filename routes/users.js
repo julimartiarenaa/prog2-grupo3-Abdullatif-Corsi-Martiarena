@@ -62,8 +62,8 @@ const registerValidations = [
         .notEmpty().withMessage('Por favor, complete el campo usuario.'),
     body('contrasenia')
         .notEmpty().withMessage('Por favor, complete el campo contraseña.')
-        .isStrongPassword({ minLength: 6, minUppercase: 1, minLowercase: 4, minNumbers: 0, minSymbols: 0 }).withMessage('La contraseña debe tener 6 caracteres y al menos una mayuscula.'),
-    body('birthday')
+        .isStrongPassword({ minLength: 6, minUppercase: 1, minLowercase: 1, minNumbers: 0, minSymbols: 0 }).withMessage('La contraseña debe tener al menos 6 caracteres y al menos una mayuscula.'),
+    body('fecha')
         .notEmpty().withMessage('Por favor, complete el campo fecha de nacimiento.')
         .isDate().withMessage('Por favor, ingrese la fecha en formato AAA/MM/DD'),
     body('dni')

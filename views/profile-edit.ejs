@@ -55,17 +55,17 @@
 				  <% } %>
 
 				<label for="contrasenia">Contraseña:</label>
-				<input type="password" name="contrasenia" id="contrasenia">
+				<input type="password" name="contrasenia" id="contrasenia" value="<%= datosUsuario.contrasenia%>">
 
 				<% if (locals.errors && errors.contrasenia){ %>
 					<p> <%= errors.contrasenia.msg %></p>
 				  <% } %>
 
-				<label for="birthday">Fecha de Nacimiento:</label>
-				<input type="text" name="birthday" id="birthday" value="<%= datosUsuario.fecha%>">
+				<label for="fecha">Fecha de Nacimiento:</label>
+				<input type="text" name="fecha" id="fecha" value="<%= datosUsuario.fecha%>">
 
-				<% if (locals.errors && errors.birthday){ %>
-					<p> <%= errors.birthday.msg %></p>
+				<% if (locals.errors && errors.fecha){ %>
+					<p> <%= errors.fecha.msg %></p>
 				  <% } %>
 
 				<label for="dni">DNI:</label>
