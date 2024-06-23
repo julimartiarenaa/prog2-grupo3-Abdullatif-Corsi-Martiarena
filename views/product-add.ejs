@@ -44,7 +44,7 @@
 					<input type="text" id="url_imagen" name="url_imagen" value="<%= locals.old !== undefined && old.imagen ? old.url_imagen : "" %>>
 
 					<% if(locals.errors && errors.comentario){ %>
-						<p> <%= errors.imagen.msg %></p>
+						<p> <%= errors.url_imagen.msg %></p>
 					  <% } %>
 				
 					<label for="nombre">Nombre del Producto:</label>

@@ -37,14 +37,14 @@
 				<h2 class="products-title" >Editar productos</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
-			<% if (locals.user != undefined) { %>
+			<% if (locals.user != undefined) { %> 
 				<form class="login" action= "/products/edit" method="POST">  
 					
 					<label for="imagen">Imagen:</label>
 					<input type="text" id="url_imagen" name="url_imagen" value="<%= producto.url_imagen %>">
 
 					<% if(locals.errors && errors.comentario){ %>
-						<p> <%= errors.imagen.msg %></p>
+						<p> <%= errors.url_imagen.msg %></p>
 					  <% } %>
 				
 					<label for="nombre">Nombre del Producto:</label>
