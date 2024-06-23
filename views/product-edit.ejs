@@ -37,27 +37,27 @@
 				<h2 class="products-title" >Editar productos</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
-			<% if (locals.user != undefined) { %>
-				<form class="login" action= "/products/store" method="POST">  
+			<% if (locals.user != undefined) { %> 
+				<form class="login" action= "/products/edit" method="POST">  
 					
 					<label for="imagen">Imagen:</label>
-					<input type="text" id="imagen" name="imagen" required>
+					<input type="text" id="url_imagen" name="url_imagen" value="<%= producto.url_imagen %>">
 
-					<% if(locals.errors && errors.comentario){ %>
-						<p> <%= errors.imagen.msg %></p>
+					<% if(locals.errors && errors.url_imagen){ %>
+						<p> <%= errors.url_imagen.msg %></p>
 					  <% } %>
 				
 					<label for="nombre">Nombre del Producto:</label>
-					<input type="text" id="nombre" name="nombre" required>
+					<input type="text" id="nombre" name="nombre" value="<%= producto.nombre %>">
 
-					<% if(locals.errors && errors.comentario){ %>
+					<% if(locals.errors && errors.nombre){ %>
 						<p> <%= errors.nombre.msg %></p>
 					  <% } %>
 				
 					<label for="descripcion" >Descripción:</label>
-					<textarea id="descripcion" name="descripcion"  cols="50" rows="15" required></textarea>
+					<textarea id="descripcion" name="descripcion"  cols="50" rows="15" value="<%= producto.descripcion %>"></textarea>
 
-					<% if(locals.errors && errors.comentario){ %>
+					<% if(locals.errors && errors.descripcion){ %>
 						<p> <%= errors.descripcion.msg %></p>
 					  <% } %>
 
