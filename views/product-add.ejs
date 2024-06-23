@@ -38,24 +38,24 @@
 			</div>
 			<!-- Show the "ultimos" products -->
 			<% if (locals.user != undefined) { %>
-				<form class="login" action= "/products/store" method="POST">  
+				<form class="login" action= "/products/create" method="POST">  
 					
 					<label for="imagen">Imagen:</label>
-					<input type="text" id="imagen" name="imagen" required>
+					<input type="text" id="url_imagen" name="url_imagen" value="<%= locals.old !== undefined && old.imagen ? old.url_imagen : "" %>>
 
 					<% if(locals.errors && errors.comentario){ %>
 						<p> <%= errors.imagen.msg %></p>
 					  <% } %>
 				
 					<label for="nombre">Nombre del Producto:</label>
-					<input type="text" id="nombre" name="nombre" required>
+					<input type="text" id="nombre" name="nombre" value="<%= locals.old !== undefined && old.nombre ? old.nombre : "" %>>
 
 					<% if(locals.errors && errors.comentario){ %>
 						<p> <%= errors.nombre.msg %></p>
 					  <% } %>
 				
 					<label for="descripcion" >Descripción:</label>
-					<textarea id="descripcion" name="descripcion"  cols="50" rows="15" required></textarea>
+					<textarea id="descripcion" name="descripcion"  cols="50" rows="15" value="<%= locals.old !== undefined && old.descripcion ? old.descripcion : "" %>></textarea>
 
 					<% if(locals.errors && errors.comentario){ %>
 						<p> <%= errors.descripcion.msg %></p>
