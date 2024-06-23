@@ -5,25 +5,25 @@ const { body } = require("express-validator");
 
 
 let validationCreate = [
-    body("imagen")
-    .notEmpty().withMessage("Debe incluir una imagen del producto"),
+    body("url_imagen")
+    .notEmpty().withMessage("Debe incluir una imagen del producto").bail(),
 
     body("nombre")
-    .notEmpty().withMessage("Debe incluir un nombre del producto"),
+    .notEmpty().withMessage("Debe incluir un nombre del producto").bail(),
 
     body("descripcion")
-    .notEmpty().withMessage("Debe incluir una descripción del producto")
+    .notEmpty().withMessage("Debe incluir una descripción del producto").bail()
 ]
 
 let validationEdit = [
-    body("imagen")
-    .notEmpty().withMessage("Debe incluir una imagen del producto"),
+    body("url_imagen")
+    .notEmpty().withMessage("Debe incluir una imagen del producto").bail(),
 
     body("nombre")
-    .notEmpty().withMessage("Debe incluir un nombre del producto"),
+    .notEmpty().withMessage("Debe incluir un nombre del producto").bail(),
 
     body("descripcion")
-    .notEmpty().withMessage("Debe incluir una descripción del producto")
+    .notEmpty().withMessage("Debe incluir una descripción del producto").bail()
 ]
 
 router.get('/id/:id', productController.product);

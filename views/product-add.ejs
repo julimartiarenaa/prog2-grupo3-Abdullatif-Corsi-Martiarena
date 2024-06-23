@@ -41,23 +41,23 @@
 				<form class="login" action= "/products/create" method="POST">  
 					
 					<label for="imagen">Imagen:</label>
-					<input type="text" id="url_imagen" name="url_imagen" value="<%= locals.old !== undefined && old.imagen ? old.url_imagen : "" %>>
+					<input type="text" id="url_imagen" name="url_imagen" value="<%= locals.old !== undefined && old.url_imagen ? old.url_imagen : "" %>">
 
-					<% if(locals.errors && errors.comentario){ %>
+					<% if(locals.errors && errors.url_imagen){ %>
 						<p> <%= errors.url_imagen.msg %></p>
 					  <% } %>
 				
 					<label for="nombre">Nombre del Producto:</label>
-					<input type="text" id="nombre" name="nombre" value="<%= locals.old !== undefined && old.nombre ? old.nombre : "" %>>
+					<input type="text" id="nombre" name="nombre" value="<%= locals.old !== undefined && old.nombre ? old.nombre : "" %>">
 
-					<% if(locals.errors && errors.comentario){ %>
+					<% if(locals.errors && errors.nombre){ %>
 						<p> <%= errors.nombre.msg %></p>
 					  <% } %>
 				
 					<label for="descripcion" >Descripción:</label>
-					<textarea id="descripcion" name="descripcion"  cols="50" rows="15" value="<%= locals.old !== undefined && old.descripcion ? old.descripcion : "" %>></textarea>
+					<textarea id="descripcion" name="descripcion"  cols="50" rows="15" value="<%= locals.old !== undefined && old.descripcion ? old.descripcion : "" %>"></textarea>
 
-					<% if(locals.errors && errors.comentario){ %>
+					<% if(locals.errors && errors.descripcion){ %>
 						<p> <%= errors.descripcion.msg %></p>
 					  <% } %>
 

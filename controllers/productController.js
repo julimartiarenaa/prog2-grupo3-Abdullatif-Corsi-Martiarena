@@ -37,7 +37,8 @@ const productController = {
             order: [["createdAt", "DESC"]]
         })
             .then(function (productos) {
-                res.render("index", {productos: productos})
+                // return res.send(productos)
+                return res.render("index", {productos: productos})
             })
             .catch(function (error) {
                 return console.log(error)
@@ -104,39 +105,32 @@ const productController = {
 
     create: function(req, res){
 
-        // solo si el usuario esta logueado puede crear un producto
-        if (req.session.user != undefined) {
+        let errors = validationResult(req);
 
-            let idUsuario = req.session.user.id;
-            // let usuario = req.session.user.nombre;
+        if (errors.isEmpty()) { 
 
+            let idUsuario = req.session.user.id;   
+    
             let form = req.body;
-
+    
             let product = {
                 vendedor_id: idUsuario,
-                // vendedor: usuario,
                 url_imagen: form.url_imagen,
                 nombre: form.nombre,
                 descripcion: form.descripcion
             }
-        } else {
-            return res.redirect('/users/login');
-        }
-
-        let errors = validationResult(req);
-
-        if (errors.isEmpty()) {
             db.Producto.create(product)
                 .then(function(results){
                     return res.redirect("/")
                 })
+           
         } else {
             return res.render('product-add', { errors: errors.mapped(), old: req.body })
         }
 
     },
 
-    editProduct: function(req, res){ //COMPLETAR ESTO
+    editProduct: function(req, res){ 
 
         let id = req.params.id
 
@@ -153,6 +147,8 @@ const productController = {
 
     edit: function(req, res){
 
+        let errors = validationResult(req);
+
         if (errors.isEmpty()) { //si no hay errores, mandar info del form y redirigir al producto editado
             
             let form = req.body
@@ -168,7 +164,7 @@ const productController = {
 
             db.Producto.update(product, {where: [{id: form.id}]})
                 .then(function (result){
-                    return res.redirect("/products/" + form.id)
+                    return res.redirect("/products/id/" + form.id)
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -180,7 +176,7 @@ const productController = {
 
             db.Producto.findByPk(id, {include: [{ association: 'usuarios' }]})
                 .then(function (results){
-                    return res.render('product-add', { producto: results, errors: errors.mapped(), old: req.body })
+                    return res.render('product-edit', { producto: results, errors: errors.mapped(), old: req.body })
                 })
                 .catch(function (error) {
                     console.log(error);
