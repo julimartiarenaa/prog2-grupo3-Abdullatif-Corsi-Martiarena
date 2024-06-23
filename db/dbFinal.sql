@@ -44,19 +44,14 @@ FOREIGN KEY (comentador_id) REFERENCES usuarios(id)
 
 INSERT INTO usuarios
 VALUES (default, "herbert", "herbert.garza@example.com", "$2a$10$i5xiNLfVGcBJkeXuHN0sQOxLayrea9fUoJ7xKB0ft/4VjjEXV0lky", "1974-03-11", 44305308, "/images/users/comentador.jpeg", null, null, null);
-VALUES (default, "herbert", "herbert.garza@example.com", "star69", "1974-03-11", 44305308, "/images/users/comentador.jpg", null, null, null);
 INSERT INTO usuarios
 VALUES (default,"dMiller", "danny.miller@example.com", "$2a$10$lIGTx71zRuHSxPNhrW22a.w0tCrVqaEnoa4gsSk5GSzgHJdgndKDW", "1974-03-12", 41305308, "/images/users/comentador.jpeg", null, null, null);
-VALUES (default,"dMiller", "danny.miller@example.com", "madrid", "1974-03-12", 41305308, "/images/users/comentador.jpg", null, null, null);
 INSERT INTO usuarios
 VALUES (default, "fVargas","francis.vargas@example.com", "$2a$10$UFwkjAO4sSfWnCJLxqV5D.bSDgHQUy.7V4JWs4i/LNCTHAHmyeU8q", "1974-04-11", 43305308, "/images/users/comentador.jpeg", null, null, null);
-VALUES (default, "fVargas","francis.vargas@example.com", "star68", "1974-04-11", 43305308, "/images/users/comentador.jpg", null, null, null);
 INSERT INTO usuarios
 VALUES (default, "gMitchelle", "gladys.mitchelle@example.com", "$2a$10$.m.LpKUrJo9kDe2wDY5Q9uqL5g0oLvDUvDH8v9xue4hArvBZo9SbG", "1974-02-11", 40305308, "/images/users/comentadora.jpg",  null, null, null);
-VALUES (default, "gMitchelle", "gladys.mitchelle@example.com", "star67", "1974-02-11", 40305308, "/images/users/comentadora.jpeg",  null, null, null);
 INSERT INTO usuarios
 VALUES (default, "jMitchelle", "jladys.mitchelle@example.com", "$2a$10$Xr8ZfTUonScBLFAq27DGcuu9OeC2UZhtzJI9lDwyvcJFXODYW44cO", "1974-02-12", 40205308, "/images/users/comentadora.jpg",  null, null, null);
-VALUES (default, "jMitchelle", "jladys.mitchelle@example.com", "star67", "1974-02-12", 40205308, "/images/users/comentadora.jpeg",  null, null, null);
 
 INSERT INTO productos
 VALUES (default, 1, "/images/products/iphone_13_pro_max.jpg", "Iphone 13 Pro Max", "El iPhone 13 Pro Max es el modelo más avanzado de Apple hasta la fecha, con su potente chip A15 Bionic, una impresionante pantalla Super Retina XDR y cámaras profesionales.", null, null, null),
