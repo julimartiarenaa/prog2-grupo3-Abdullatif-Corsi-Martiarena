@@ -11,8 +11,7 @@ const productController = {
         db.Producto.findAll({
             where: {[op.or]: 
                 [{nombre: {[op.like]: `%${search}%`}},
-                {descripcion: {[op.like]: `%${search}%`}}
-            ]}, 
+                {descripcion: {[op.like]: `%${search}%`}}]}, 
             include: [
                 {association: "comentarios"},
                 {association: "usuarios"}
@@ -20,6 +19,8 @@ const productController = {
             order: [['createdAt', 'DESC']]
         })
         .then(function(results){
+            console.log(results);
+            console.log(search);
             return res.render("search-results", {search: search, productos: results})
         })
         .catch(function (error) {
@@ -55,7 +56,6 @@ const productController = {
 
         ]})
         .then(function (producto) {
-            // return res.send(producto)
                     return db.Usuario.findAll()
                     .then(function (usuario) {
 
@@ -69,17 +69,32 @@ const productController = {
     },
     deleteProduct: function (req, res) {
         let idProducto = req.params.id
-        db.Producto.destroy({
-            where:{
-                id: idProducto
-            }
-        })
-        .then(function (producto) {
+        let idVendedor = req.params.idVendedor
+        if (idVendedor == req.session.user.id) {
+            db.Comentario.destroy({
+                where:{
+                    producto_id: idProducto
+                }
+            })
+            .then(function (comentarios) {
+                return db.Producto.destroy({
+                    where:{
+                        id: idProducto
+                    }
+                })
+                .then(function (producto) {
+                    return res.redirect("/")
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+            })
+            .catch(function (error) {
+                console.log(error);
+            })  
+        } else {
             return res.redirect("/")
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
+        }
     },
 
     addProduct: function (req, res) {
