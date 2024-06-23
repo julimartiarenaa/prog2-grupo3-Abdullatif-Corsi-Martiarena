@@ -64,12 +64,13 @@ const registerValidations = [
         .notEmpty().withMessage('Por favor, complete el campo contraseña.')
         .isStrongPassword({ minLength: 6, minUppercase: 1, minLowercase: 1, minNumbers: 0, minSymbols: 0 }).withMessage('La contraseña debe tener al menos 6 caracteres y al menos una mayuscula.'),
     body('fecha')
-        .notEmpty().withMessage('Por favor, complete el campo fecha de nacimiento.')
+        .optional({ checkFalsy: true }) // Permite que este vacio, pero si no lo esta tiene que cumplir con las condiciones. 
         .isDate().withMessage('Por favor, ingrese la fecha en formato AAA/MM/DD'),
     body('dni')
-        .notEmpty().withMessage('Por favor, complete el campo DNI.'),        
+        .optional({ checkFalsy: true })
+        .isInt().withMessage('Por favor, complete un DNI numerico.'),       
     body('profilePic')
-        .notEmpty().withMessage('Por favor, ingrese una foto')
+        .optional({ checkFalsy: true }) 
         .custom(function (value) {
             let imagenes = ['comentador.jpeg', 'comentadora.jpg', 'profile.jpg'];
             // en python if value not in imagenes 

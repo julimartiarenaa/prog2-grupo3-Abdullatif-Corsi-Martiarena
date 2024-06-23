@@ -18,6 +18,7 @@ const userController = {
                     vendedor_id: idSession
                 }
             }).then(function (productos) {
+                console.log(productos);
                 // una vez que tengo los productos, busco los comentarios.
                 return db.Comentario.findAll({
                     where: {
@@ -179,6 +180,8 @@ const userController = {
         console.log(user);
 
         let errors = validationResult(req);
+
+        console.log(errors);
 
         if (errors.isEmpty()) {
             db.Usuario.create(user)
