@@ -121,51 +121,59 @@ const productController = {
 
     },
 
-    edit: function(req, res){ // completar/corregir toda esta parte
+    // edit: function(req, res){ // ESTA PARTE BORRAR
 
-        if (req.session.user != undefined) {
+    //     if (req.session.user != undefined) {
 
-            let idUsuario = req.session.user.id;
+    //         let idUsuario = req.session.user.id;
 
-            let form = req.body;
+    //         let form = req.body;
 
-            let product = {
-                vendedor_id: idUsuario,
-                url_imagen: form.url_imagen,
-                nombre: form.nombre,
-                descripcion: form.descripcion
-            }
-        } else {
-            return res.redirect('/users/login');
-        }
+    //         let product = {
+    //             vendedor_id: idUsuario,
+    //             url_imagen: form.url_imagen,
+    //             nombre: form.nombre,
+    //             descripcion: form.descripcion
+    //         }
+    //     } else {
+    //         return res.redirect('/users/login');
+    //     }
 
-        let errors = validationResult(req);
+    //     let errors = validationResult(req);
 
-        if (errors.isEmpty()) {
-            db.Producto.update(product, {where:[{id:form.id}]}) //product se puede reemplazar por form
-                .then(function(result){
-                    return res.redirect("/")
-                })
-        } else {
-            return res.render('product-add', { errors: errors.mapped(), old: req.body })
-        }
+    //     if (errors.isEmpty()) {
+    //         db.Producto.update(product, {where:[{id:form.id}]}) //product se puede reemplazar por form
+    //             .then(function(result){
+    //                 return res.redirect("/")
+    //             })
+    //     } else {
+    //         return res.render('product-add', { errors: errors.mapped(), old: req.body })
+    //     }
 
-    },
+    // },
 
-    editProduct: function(req, res){
+    editProduct: function(req, res){ //COMPLETAR ESTO
 
         let id = req.params.id
 
-        db.Producto.findByPk(id)
-        .then(function (results){
-            return res.render("product-edit", {producto: results})
-        })},
+        db.Producto.findByPk(id, {include: [{ association: 'usuarios' }]})
+            .then(function (results){
+                return res.render("product-edit", {producto: results})
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+        },
 
-    editt: function(req, res){
+      
+
+    edit: function(req, res){
 
         if (errors.isEmpty()) { //si no hay errores, mandar info del form y redirigir al producto editado
             
             let form = req.body
+
+            let idUsuario = req.session.user.id;
 
             let product = {
                 vendedor_id: idUsuario,
@@ -195,56 +203,30 @@ const productController = {
                 })
 
         }
-
-        db.Producto.findByPk(idProducto, {
-            include: [
-                { association: 'usuarios' }
-            ]
-        })
-            .then(function (producto) {
-                //return res.send(errors.mapped())
-                return res.render('product-edit', { producto: producto, errors: errors.mapped(), old: req.body });
-            })
-            .catch(function (e) {
-                console.log(e);
-            })
-        
-
-        db.Producto.update(product, {where:[{id:form.id}]}) //product se puede reemplazar por form
-                .then(function(result){
-                    return res.redirect("/")
-                })
         
     }
 
-//     let errors = validationResult(req)
-//     if (errors.isEmpty()) {
-//       let id = req.params.id
-//       let form = req.body;
-//       let producto_editado = {
-//         nombreProducto: form.nombreProducto ,
-//         imagen: form.imagen ,
-//         descripcion: form.descripcion,
-//         idUsuario: req.session.user.id,
-//       }
-//       filtrar = {
-//         where : [{id : id}]
-//       }
-//       db.Producto.update(producto_editado, filtrar).then(function(){
-//         return res.redirect("/") 
-//       })
+    // db.Producto.findByPk(idProducto, {
+    //     include: [
+    //         { association: 'usuarios' }
+    //     ]
+    // })
+    //     .then(function (producto) {
+    //         //return res.send(errors.mapped())
+    //         return res.render('product-edit', { producto: producto, errors: errors.mapped(), old: req.body });
+    //     })
+    //     .catch(function (e) {
+    //         console.log(e);
+    //     })
     
-//     } else{
-//       let id = req.params.id
-//       db.Producto.findByPk(id).then(function(result){
-//         return res.render("product-edit", {
-//           result : result,
-//           errors: errors.mapped(),
-//           old: req.body
-//         })
-//       })
-//     }
-//   }
+
+    // db.Producto.update(product, {where:[{id:form.id}]}) //product se puede reemplazar por form
+    //         .then(function(result){
+    //             return res.redirect("/")
+    //         })
+
+
+
 
 }
 
