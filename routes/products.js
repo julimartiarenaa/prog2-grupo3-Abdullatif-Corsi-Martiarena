@@ -26,7 +26,7 @@ let validationEdit = [
     .notEmpty().withMessage("Debe incluir una descripción del producto")
 ]
 
-router.get('/:id', productController.product);
+router.get('/id/:id', productController.product);
 router.get('/delete/:id/:idVendedor', productController.deleteProduct);
 router.get('/product-add', productController.addProduct); // lo que va en la url
 router.post("/create", validationCreate, productController.create); //--> es lo que va en el action 
