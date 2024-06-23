@@ -71,6 +71,7 @@ const userController = {
                                     return db.Usuario.findByPk(idUsuarioBuscado)
                                         .then(function (usuario) {
                                             //defino los datos de la persona que esta en sesion.
+                                            console.log(usuario);
                                             let logueado = undefined;
 
                                             if (req.session.user != undefined) {

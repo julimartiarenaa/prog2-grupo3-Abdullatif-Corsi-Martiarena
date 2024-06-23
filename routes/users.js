@@ -67,18 +67,7 @@ const registerValidations = [
         .notEmpty().withMessage('Por favor, complete el campo fecha de nacimiento.')
         .isDate().withMessage('Por favor, ingrese la fecha en formato AAA/MM/DD'),
     body('dni')
-        .notEmpty().withMessage('Por favor, complete el campo DNI.')
-        //busco si el dni ya existe, pues debe ser unico (lo definimos asi en nuestra db).
-        .custom(function (value) {
-            return db.Usuario.findOne({
-                where: { dni: value }
-            })
-                .then(function (usuario) {
-                    if (usuario) {
-                        throw new Error('El dni ingresado ya se encuentra registrado')
-                    }
-                })
-        }),
+        .notEmpty().withMessage('Por favor, complete el campo DNI.'),        
     body('profilePic')
         .notEmpty().withMessage('Por favor, ingrese una foto')
         .custom(function (value) {
