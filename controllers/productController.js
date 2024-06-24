@@ -147,7 +147,9 @@ const productController = {
 
         let errors = validationResult(req)
 
-        let form = req.body
+        if (errors.isEmpty()) { //si no hay errores, actualizar la ino del forn en la base de datos y redirigir al home
+
+            let form = req.body
 
             let idVendedor = req.params.idVendedor
 
