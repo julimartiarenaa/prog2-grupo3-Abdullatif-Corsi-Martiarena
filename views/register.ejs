@@ -58,7 +58,7 @@
 				  <% } %>
 
 				<label for="fecha">Fecha de Nacimiento:</label>
-				<input type="text" name="fecha" id="fecha" placeholder="AAAA/MM/DD" value="<%= locals.old !== undefined && old.fecha ? old.fecha : "" %>">
+				<input type="date" name="fecha" id="fecha" placeholder="AAAA/MM/DD" value="<%= locals.old !== undefined && old.fecha ? old.fecha : "" %>">
 				
 				<% if (locals.errors && errors.fecha){ %>
 					<p> <%= errors.fecha.msg %></p>

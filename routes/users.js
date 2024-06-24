@@ -62,22 +62,22 @@ const registerValidations = [
         .notEmpty().withMessage('Por favor, complete el campo usuario.'),
     body('contrasenia')
         .notEmpty().withMessage('Por favor, complete el campo contraseña.')
-        .isStrongPassword({ minLength: 6, minUppercase: 1, minLowercase: 1, minNumbers: 0, minSymbols: 0 }).withMessage('La contraseña debe tener al menos 6 caracteres y al menos una mayuscula.'),
-    body('fecha')
-        .optional({ checkFalsy: true }) // Permite que este vacio, pero si no lo esta tiene que cumplir con las condiciones. 
-        .isDate().withMessage('Por favor, ingrese la fecha en formato AAA/MM/DD'),
-    body('dni')
-        .optional({ checkFalsy: true })
-        .isInt().withMessage('Por favor, complete un DNI numerico.'),       
+        .isStrongPassword({ minLength: 6, minUppercase: 1, minLowercase: 1, minNumbers: 0, minSymbols: 0 }).withMessage('La contraseña debe tener al menos 6 caracteres y al menos una mayuscula.'),     
     body('profilePic')
-        .optional({ checkFalsy: true }) 
-        .custom(function (value) {
-            let imagenes = ['comentador.jpeg', 'comentadora.jpg', 'profile.jpg'];
-            // en python if value not in imagenes 
-            if (!imagenes.includes(value)) {
-                throw new Error('Por favor ingrese una de las siguientes imagenes: comentador.jpeg, comentadora.jpg, profile.jpg')
+        .custom(function (value, {req}) {
+            //si la foto esta vacia, le otorgo una por default.
+            if (!value || value == '') {
+                req.body.profilePic = 'defaultImage.jpg'
             }
-            return true;
+            //sino, chequeo que este en nuestra db
+            else{
+                let imagenes = ['comentador.jpeg', 'comentadora.jpg', 'profile.jpg'];
+                // en python if value not in imagenes 
+                if (!imagenes.includes(value)) {
+                    throw new Error('Por favor ingrese una de las siguientes imagenes: comentador.jpeg, comentadora.jpg, profile.jpg')
+                }
+            }
+            return true
         })
 ]
 
@@ -100,4 +100,5 @@ router.get('/login', userController.login);
 router.post('/login', loginValidations, userController.processLogin);
 
 router.post('/logout', userController.logout);
+
 module.exports = router;
