@@ -16,7 +16,8 @@ const userController = {
                 //busco los productos que coincidan con el id del usuario
                 where: {
                     vendedor_id: idSession
-                }
+                },
+                order: [['createdAt', 'DESC']]
             }).then(function (productos) {
                 console.log(productos);
                 // una vez que tengo los productos, busco los comentarios.
@@ -168,22 +169,29 @@ const userController = {
 
         let form = req.body;
 
-        let user = {
-            email: form.email,
-            usuario: form.usuario,
-            contrasenia: bcrypt.hashSync(form.contrasenia, 10),
-            fecha: form.fecha,
-            dni: form.dni,
-            foto_perfil: '/images/users/' + form.profilePic
-        };
-
-        console.log(user);
-
         let errors = validationResult(req);
 
         console.log(errors);
 
         if (errors.isEmpty()) {
+
+            let user = {
+                email: form.email,
+                usuario: form.usuario,
+                contrasenia: bcrypt.hashSync(form.contrasenia, 10),
+                fecha: form.fecha,
+                dni: form.dni,
+                foto_perfil: undefined
+            };
+
+            if (form.profilePic == "") {
+                user.foto_perfil = '/images/users/defaultImage.jpg'
+            } else {
+                user.foto_perfil = '/images/users/'+form.profilePic
+            };
+
+            console.log(user);
+
             db.Usuario.create(user)
                 .then(function (result) {
                     return res.redirect("/")

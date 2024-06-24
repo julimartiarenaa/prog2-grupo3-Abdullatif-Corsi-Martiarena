@@ -66,6 +66,7 @@ const productController = {
                 })
 
     },
+    
     deleteProduct: function (req, res) {
         let idProducto = req.params.id
         let idVendedor = req.params.idVendedor
@@ -147,7 +148,7 @@ const productController = {
 
         let form = req.body
 
-        if (errors.isEmpty()) { //si no hay errores, actualizar info del form en base de datos y redirigir al Home
+            let idVendedor = req.params.idVendedor
 
             if (req.session.user != undefined) {   //Si el usuario está logueado, le permito editar 
 
