@@ -28,10 +28,10 @@ let validationEdit = [
 
 router.get('/id/:id', productController.product);
 router.get('/delete/:id/:idVendedor', productController.deleteProduct);
-router.get('/product-add', productController.addProduct); // lo que va en la url
-router.post("/create", validationCreate, productController.create); //--> es lo que va en el action 
-router.get('/product-edit/:id', productController.editProduct); // lo que va en la url
-router.post("/edit", validationEdit, productController.edit); //--> es lo que va en el action 
+router.get('/product-add', productController.addProduct); 
+router.post("/create", validationCreate, productController.create);  
+router.get('/product-edit/:id', productController.editProduct); 
+router.post("/edit", validationEdit, productController.edit);  
 
 
 module.exports = router
