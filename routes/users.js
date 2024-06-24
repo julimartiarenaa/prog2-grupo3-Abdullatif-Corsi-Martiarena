@@ -72,7 +72,7 @@ const registerValidations = [
             //sino, chequeo que este en nuestra db
             else{
                 let imagenes = ['comentador.jpeg', 'comentadora.jpg', 'profile.jpg'];
-                // en python if value not in imagenes 
+                // en python if value not in imagenes
                 if (!imagenes.includes(value)) {
                     throw new Error('Por favor ingrese una de las siguientes imagenes: comentador.jpeg, comentadora.jpg, profile.jpg')
                 }
