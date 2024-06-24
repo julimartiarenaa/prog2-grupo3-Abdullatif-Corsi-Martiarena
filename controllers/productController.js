@@ -121,7 +121,7 @@ const productController = {
             }
             db.Producto.create(product)
                 .then(function(results){
-                    return res.redirect("/")
+                    return res.redirect("/products/id/" + results.id)
                 })
            
         } else {
@@ -151,24 +151,32 @@ const productController = {
 
         if (errors.isEmpty()) { //si no hay errores, mandar info del form y redirigir al producto editado
             
-            let form = req.body
+            // if (req.session.user != undefined) {   //Si el usuario está logueado puede editar el producto 
 
-            let idUsuario = req.session.user.id;
+                let idUsuario = req.session.user.id;
+                // return res.send(req.session.user)
 
-            let product = {
-                vendedor_id: idUsuario,
-                url_imagen: form.url_imagen,
-                nombre: form.nombre,
-                descripcion: form.descripcion
-            }
+                let form = req.body
 
-            db.Producto.update(product, {where: [{id: form.id}]})
-                .then(function (result){
-                    return res.redirect("/products/id/" + form.id)
-                })
-                .catch(function (error) {
-                    console.log(error);
-                })
+                let product = {
+                    vendedor_id: idUsuario,
+                    url_imagen: form.url_imagen,
+                    nombre: form.nombre,
+                    descripcion: form.descripcion
+                }
+                return res.send(product)
+
+                db.Producto.update(product, {where: [{id: form.id}]})
+                    .then(function (result){
+                        return res.redirect("/products/id/" + result.id)
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            // } // Si no, lo redirigo para que se loguee
+            // else {
+            //     return res.redirect('/users/login');
+            // }
 
         } else { //si HAY errores, mostrarlos en la vista
 
