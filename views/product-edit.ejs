@@ -40,22 +40,25 @@
 			<% if (locals.user != undefined) { %> 
 				<form class="login" action= "/products/edit" method="POST">  
 					
+                    <input type="hidden" name="id" value="<%= producto.id %>">
+				    <input type="hidden" name="vendedor_id" value="<%= producto.vendedor_id %>"> <!-- vendedor_id -> usuarios.usuario.id -->
+
 					<label for="imagen">Imagen:</label>
-					<input type="text" id="url_imagen" name="url_imagen" value="<%= producto.url_imagen %>">
+					<input type="text" id="url_imagen" name="url_imagen" value="<%= (locals.old && locals.old.url_imagen !== undefined) ? locals.old.url_imagen : producto.url_imagen %>"> <!-- queremos poder ver los valores previos para editarlos -->
 
 					<% if(locals.errors && errors.url_imagen){ %>
 						<p> <%= errors.url_imagen.msg %></p>
 					  <% } %>
 				
 					<label for="nombre">Nombre del Producto:</label>
-					<input type="text" id="nombre" name="nombre" value="<%= producto.nombre %>">
+					<input type="text" id="nombre" name="nombre" value="<%= (locals.old && locals.old.nombre !== undefined) ? locals.old.nombre : producto.nombre %>"> <!-- queremos poder ver los valores previos para editarlos -->
 
 					<% if(locals.errors && errors.nombre){ %>
 						<p> <%= errors.nombre.msg %></p>
 					  <% } %>
 				
 					<label for="descripcion" >Descripción:</label>
-					<textarea id="descripcion" name="descripcion"  cols="50" rows="15" value="<%= producto.descripcion %>"></textarea>
+					<textarea id="descripcion" name="descripcion"  cols="50" rows="15" value="<%= (locals.old && locals.old.descripcion !== undefined) ? locals.old.descripcion : producto.descripcion %>"></textarea> <!-- nunca se va a mostrar el valor anterior porque es un textarea, si fuera input el value estaría correcto -->
 
 					<% if(locals.errors && errors.descripcion){ %>
 						<p> <%= errors.descripcion.msg %></p>

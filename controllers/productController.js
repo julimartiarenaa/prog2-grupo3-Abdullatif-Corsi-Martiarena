@@ -37,7 +37,6 @@ const productController = {
             order: [["createdAt", "DESC"]]
         })
             .then(function (productos) {
-                // return res.send(productos)
                 return res.render("index", {productos: productos})
             })
             .catch(function (error) {
@@ -108,7 +107,7 @@ const productController = {
 
         let errors = validationResult(req);
 
-        if (errors.isEmpty()) { 
+        if (errors.isEmpty()) { //si no hay errores, actualizar info del form en base de datos y redirigir al producto creado
 
             let idUsuario = req.session.user.id;   
     
@@ -125,7 +124,7 @@ const productController = {
                     return res.redirect("/products/id/" + results.id)
                 })
            
-        } else {
+        } else { //si HAY errores, mostrarlos en la vista
             return res.render('product-add', { errors: errors.mapped(), old: req.body })
         }
 
@@ -144,51 +143,40 @@ const productController = {
             })
         },
 
-
-
     edit: function(req, res){
 
-        let errors = validationResult(req);
+        let errors = validationResult(req)
 
-        if (errors.isEmpty()) { //si no hay errores, mandar info del form y redirigir al producto editado
+        let form = req.body
 
-            let idVendedor = req.params.vendedor_id;
+            let idVendedor = req.params.idVendedor
 
-            console.log(idVendedor);
-            console.log('dios');
-
-            if (req.session.user != undefined && req.session.user.id == idVendedor) {   //Si el usuario está logueado y es el vendedor del producto, le permito editarlo 
+            if (req.session.user != undefined) {   //Si el usuario está logueado, le permito editar 
 
                 let idUsuario = req.session.user.id;
-                // return res.send(req.session.user)
 
-                let form = req.body
+                if (form.vendedor_id == idUsuario){  //chequeo que el usuario sea el vendedor del producto que quiere editar
 
-                let product = {
-                    vendedor_id: idUsuario,
-                    url_imagen: form.url_imagen,
-                    nombre: form.nombre,
-                    descripcion: form.descripcion
+                    db.Producto.update(form, {where: [{id: form.id}]})
+                        .then(function (result){
+                            return res.redirect("/")
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        })
+
+                } else {  //si no es, lo redirijo a la Home porque no puede editar ese producto
+                    return res.render('/') 
                 }
-                // return res.send(product.url_imagen)
 
-                db.Producto.update(product, {where: [{id: req.params.id}]})
-                    .then(function (result){
-                        return res.redirect("/products/id/" + result.id)
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    })
             } // Si no, lo redirigo para que se loguee
             else {
                 return res.redirect('/users/login');
             }
-
+            
         } else { //si HAY errores, mostrarlos en la vista
 
-            let id = req.params.id
-
-            db.Producto.findByPk(id, {include: [{ association: 'usuarios' }]})
+            db.Producto.findByPk(form.id, {include: [{ association: 'usuarios' }]})
                 .then(function (results){
                     return res.render('product-edit', { producto: results, errors: errors.mapped(), old: req.body })
                 })
@@ -200,8 +188,8 @@ const productController = {
         
     }
 
-    
 }
+
 
 module.exports = productController;
 
