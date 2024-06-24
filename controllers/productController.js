@@ -150,8 +150,10 @@ const productController = {
         let errors = validationResult(req);
 
         if (errors.isEmpty()) { //si no hay errores, mandar info del form y redirigir al producto editado
-            
-            // if (req.session.user != undefined) {   //Si el usuario está logueado puede editar el producto 
+
+            let idVendedor = req.params.idVendedor
+
+            if (req.session.user != undefined && req.session.user.id == idVendedor) {   //Si el usuario está logueado y es el vendedor del producto, le permito editarlo 
 
                 let idUsuario = req.session.user.id;
                 // return res.send(req.session.user)
@@ -164,19 +166,19 @@ const productController = {
                     nombre: form.nombre,
                     descripcion: form.descripcion
                 }
-                return res.send(product)
+                // return res.send(product.url_imagen)
 
-                db.Producto.update(product, {where: [{id: form.id}]})
+                db.Producto.update(product, {where: [{id: req.params.id}]})
                     .then(function (result){
                         return res.redirect("/products/id/" + result.id)
                     })
                     .catch(function (error) {
                         console.log(error);
                     })
-            // } // Si no, lo redirigo para que se loguee
-            // else {
-            //     return res.redirect('/users/login');
-            // }
+            } // Si no, lo redirigo para que se loguee
+            else {
+                return res.redirect('/users/login');
+            }
 
         } else { //si HAY errores, mostrarlos en la vista
 
