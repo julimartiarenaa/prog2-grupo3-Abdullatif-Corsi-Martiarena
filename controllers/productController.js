@@ -3,7 +3,6 @@ let dbProducto = db.Producto;
 const { validationResult } = require('express-validator');
 const op = db.Sequelize.Op;
 
-
 const productController = {
 
     buscador: function(req, res){
