@@ -156,10 +156,12 @@ const productController = {
 
             let product = {
                 vendedor_id: idVendedor,
-                url_imagen: form.url_imagen,
+                url_imagen: '/images/products/' + form.url_imagen,
                 nombre: form.nombre,
                 descripcion: form.descripcion
             }
+
+            console.log(product);
 
             if (req.session.user != undefined) {   //Si el usuario está logueado, le permito editar 
 
@@ -190,6 +192,7 @@ const productController = {
 
             db.Producto.findByPk(form.id, {include: [{ association: 'usuarios' }]})
                 .then(function (results){
+                    console.log(results.usuarios);
                     return res.render('product-edit', { producto: results, errors: errors.mapped(), old: req.body })
                 })
                 .catch(function (error) {

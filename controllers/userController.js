@@ -192,7 +192,7 @@ const userController = {
             if (form.profilePic == "") {
                 user.foto_perfil = '/images/users/defaultImage.jpg'
             } else {
-                user.foto_perfil = '/images/users/'+form.profilePic
+                user.foto_perfil = '/images/users/'+ form.profilePic
             };
 
             console.log(user);

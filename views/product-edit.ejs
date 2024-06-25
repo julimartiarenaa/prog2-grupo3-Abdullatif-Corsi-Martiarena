@@ -44,7 +44,7 @@
 				    <input type="hidden" name="vendedor_id" value="<%= producto.vendedor_id %>"> <!-- vendedor_id -> usuarios.usuario.id -->
 
 					<label for="imagen">Imagen:</label>
-					<input type="text" id="url_imagen" name="url_imagen" value="<%= (locals.old && locals.old.url_imagen !== undefined) ? locals.old.url_imagen : producto.url_imagen %>"> <!-- queremos poder ver los valores previos para editarlos -->
+					<input type="text" id="url_imagen" name="url_imagen" value="<%= (locals.old && locals.old.url_imagen !== undefined) ? locals.old.url_imagen : producto.url_imagen.slice(17) %>"> <!-- queremos poder ver los valores previos para editarlos -->
 
 					<% if(locals.errors && errors.url_imagen){ %>
 						<p> <%= errors.url_imagen.msg %></p>
