@@ -6,7 +6,15 @@ const { body } = require("express-validator");
 
 let validationCreate = [
     body("url_imagen")
-    .notEmpty().withMessage("Debe incluir una imagen del producto").bail(),
+    .notEmpty().withMessage("Debe incluir una imagen del producto")
+    .custom(function (value, {req}) {
+        let imagenes = ['iphone_8_plus.jpg', 'iphone_11_pro.jpg','iphone_12_mini.jpg','iphone_13_pro_max.jpg','iphone_13.jpg','iphone_se_2020.jpg','iphone_xr.jpg','iphone_xs.jpg', 'samsung_a52.jpg', 'samsung_s21_ultra.jpg' ];
+        // en python if value not in imagenes
+        if (!imagenes.includes(value)) {
+            throw new Error('Por favor ingrese una de las siguientes imagenes: iphone_8_plus.jpg, iphone_11_pro.jpg, iphone_12_mini.jpg, iphone_13_pro_max.jpg, iphone_13.jpg, iphone_se_2020.jpg, iphone_xr.jpg, iphone_xs.jpg, samsung_a52.jpg, samsung_s21_ultra.jpg')
+        }
+        return true
+    }),
 
     body("nombre")
     .notEmpty().withMessage("Debe incluir un nombre del producto").bail(),
@@ -28,8 +36,10 @@ let validationEdit = [
 
 router.get('/id/:id', productController.product);
 router.get('/delete/:id/:idVendedor', productController.deleteProduct);
+
 router.get('/product-add', productController.addProduct); 
 router.post("/create", validationCreate, productController.create);  
+
 router.get('/product-edit/:id', productController.editProduct); 
 router.post("/edit", validationEdit, productController.edit);  
 

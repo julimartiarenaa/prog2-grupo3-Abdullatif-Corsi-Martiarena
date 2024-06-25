@@ -106,6 +106,8 @@ const productController = {
 
         let errors = validationResult(req);
 
+        console.log(errors);
+
         if (errors.isEmpty()) { //si no hay errores, actualizar info del form en base de datos y redirigir al producto creado
 
             let idUsuario = req.session.user.id;   
@@ -114,7 +116,7 @@ const productController = {
     
             let product = {
                 vendedor_id: idUsuario,
-                url_imagen: form.url_imagen,
+                url_imagen: '/images/products/' + form.url_imagen,
                 nombre: form.nombre,
                 descripcion: form.descripcion
             }
@@ -140,7 +142,7 @@ const productController = {
             .catch(function (error) {
                 console.log(error);
             })
-        },
+    },
 
     edit: function(req, res){
 
