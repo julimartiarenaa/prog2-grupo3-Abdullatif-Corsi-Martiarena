@@ -116,7 +116,7 @@ const productController = {
     
             let product = {
                 vendedor_id: idUsuario,
-                url_imagen: '/images/products/' + form.url_imagen,
+                url_imagen: form.url_imagen,
                 nombre: form.nombre,
                 descripcion: form.descripcion
             }
@@ -154,13 +154,20 @@ const productController = {
 
             let idVendedor = req.params.idVendedor
 
+            let product = {
+                vendedor_id: idVendedor,
+                url_imagen: form.url_imagen,
+                nombre: form.nombre,
+                descripcion: form.descripcion
+            }
+
             if (req.session.user != undefined) {   //Si el usuario está logueado, le permito editar 
 
                 let idUsuario = req.session.user.id;
 
                 if (form.vendedor_id == idUsuario){  //chequeo que el usuario sea el vendedor del producto que quiere editar
 
-                    db.Producto.update(form, {where: [{id: form.id}]})
+                    db.Producto.update(product, {where: [{id: form.id}]})
                         .then(function (result){
                             return res.redirect("/")
                         })
@@ -178,6 +185,8 @@ const productController = {
             }
             
         } else { //si HAY errores, mostrarlos en la vista
+
+            let form = req.body
 
             db.Producto.findByPk(form.id, {include: [{ association: 'usuarios' }]})
                 .then(function (results){

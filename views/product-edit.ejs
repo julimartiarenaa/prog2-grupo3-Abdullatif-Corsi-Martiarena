@@ -58,7 +58,7 @@
 					  <% } %>
 				
 					<label for="descripcion" >Descripción:</label>
-					<textarea id="descripcion" name="descripcion"  cols="50" rows="15" value="<%= (locals.old && locals.old.descripcion !== undefined) ? locals.old.descripcion : producto.descripcion %>"></textarea> <!-- nunca se va a mostrar el valor anterior porque es un textarea, si fuera input el value estaría correcto -->
+					<input type="text" id="descripcion" name="descripcion"  cols="50" rows="15" value="<%= (locals.old && locals.old.descripcion !== undefined) ? locals.old.descripcion : producto.descripcion %>"> <!-- nunca se va a mostrar el valor anterior porque es un textarea, si fuera input el value estaría correcto -->
 
 					<% if(locals.errors && errors.descripcion){ %>
 						<p> <%= errors.descripcion.msg %></p>
