@@ -161,8 +161,13 @@ const userController = {
     },
 
     registerCreate: function (req, res) {
-
-        return res.render('register')
+        //si el usuario esta logueado, no dejo que se registre
+        if (req.session.user != undefined) {
+            return res.redirect('/')
+        }
+        else{
+            return res.render('register')
+        }
     },
 
     registerStore: function (req, res) {
